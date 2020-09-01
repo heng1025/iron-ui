@@ -1,0 +1,29 @@
+{
+  "name": "iron-ui",
+  "version": "1.0.0",
+  "description": "My webpack project",
+  "main": "index.ts",
+  "author": "iron",
+  "license": "MIT",
+  "scripts": {
+    "storybook": "start-storybook -p 6008",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "antd": "3.26",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.20",
+    "react-virtualized": "^9.22.2"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/react": "^6.0.21",
+    "css-loader": "^4.2.2",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.0",
+    "react-is": "^16.13.1",
+    "style-loader": "^1.2.1"
+  }
+}
