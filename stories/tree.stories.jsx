@@ -20,7 +20,6 @@ function dig(path = '0', level = 2) {
 }
 
 const treeData = dig();
-console.log('treeData', treeData)
 
 export default {
   title: 'Components/VirtualTree',

@@ -7,7 +7,8 @@ import React, {
 } from 'react';
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
-import { Input, Icon } from 'antd';
+import Icon from 'antd/es/icon';
+import Input from 'antd/es/input';
 import { Options } from './Common';
 import styles from './index.less';
 

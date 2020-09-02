@@ -7,11 +7,10 @@ import React, {
 } from 'react';
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
-import { Input } from 'antd';
+import Input from 'antd/es/input';
 import { Options } from './Common';
 import styles from './index.less';
 
-// #components-auto-complete-demo-certain-category
 export const VirtualAutoComplete = forwardRef((props, ref) => {
   const {
     value,
@@ -23,7 +22,7 @@ export const VirtualAutoComplete = forwardRef((props, ref) => {
     placeholder = 'Please input',
     suffix,
     filterOption,
-    isFixedMode, // antd #components-auto-complete-demo-certain-category
+    isFixedMode,
     optionContainerStyle,
     optionTitle, // ReactNode
     onFocus,

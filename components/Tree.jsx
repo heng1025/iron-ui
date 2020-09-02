@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect, useRef } from 'react';
-import { Icon, Checkbox } from 'antd';
+import Icon from 'antd/es/icon';
+import Checkbox from 'antd/es/checkbox';
 import { VListWithDynamic, Title } from './Common';
 
 import styles from './index.less';
