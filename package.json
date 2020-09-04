@@ -19,11 +19,12 @@
     "autocomplete",
     "tree"
   ],
+  "homepage": "http://ui.chenggang.win",
   "scripts": {
     "build-es": "babel components --out-dir lib/",
     "build-dist": "webpack -w",
     "storybook": "start-storybook -p 6008",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@ant-design/icons": "^2.1.1",
