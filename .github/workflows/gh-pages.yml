@@ -1,4 +1,4 @@
-name: build website
+name: build iron ui website
 
 on:
   push:
@@ -15,14 +15,14 @@ jobs:
       uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
       with:
         persist-credentials: false
-    
+
     - name: Build
       env:
         PUBLIC_URL: /iron-ui
       run: |
         yarn
         yarn build-storybook
-      
+
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
