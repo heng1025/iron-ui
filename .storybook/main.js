@@ -5,8 +5,7 @@ module.exports = {
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   webpackFinal: async (config, options) => {
-    // console.log(config);
-    config.entry.push('antd/dist/antd.css');
+    // console.log('config', config);
     // change webpack config
     config.module.rules.push({
       test: /\.less$/,
