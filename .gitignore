@@ -1,6 +1,9 @@
 dist/
+es/
+lib/
 node_modules/
 storybook-static/
 yarn.lock
+yarn-error.log
 package-lock.json
 .DS_Store
