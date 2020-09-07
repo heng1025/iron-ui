@@ -1,9 +1,9 @@
 {
   "name": "iron-ui",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A react UI Library",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "files": [
     "dist",
     "lib",
@@ -19,10 +19,14 @@
     "autocomplete",
     "tree"
   ],
-  "homepage": "http://ui.chenggang.win",
+  "homepage": "https://ui.chenggang.win",
   "scripts": {
-    "build-es": "babel components --out-dir lib/",
-    "build-dist": "webpack -w",
+    "build-es": "export NODE_ENV='es' && babel components --out-dir es/ && yarn build-es-less",
+    "build-es-less": "lessc components/index.less es/index.css",
+    "build-lib": "babel components --out-dir lib/ && yarn build-lib-less",
+    "build-lib-less": "lessc components/index.less lib/index.css",
+    "build": "rimraf es/ lib/  && yarn build-es && yarn build-lib",
+    "dist": "webpack",
     "storybook": "start-storybook -p 6008",
     "build-storybook": "build-storybook -s public"
   },
@@ -51,9 +55,17 @@
     "css-loader": "^4.2.2",
     "less": "^3.12.2",
     "less-loader": "^7.0.0",
+    "rimraf": "^3.0.2",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^3.3.12"
-  }
+    "webpack-cli": "^3.3.12",
+    "webpackbar": "^4.0.0"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/index.js",
+      "maxSize": "300 kB"
+    }
+  ]
 }

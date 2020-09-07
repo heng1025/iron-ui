@@ -1,8 +1,15 @@
 // build dist
 const path = require('path');
+const webpack = require('webpack');
+const WebpackBar = require('webpackbar');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+function getProjectPath(...filePath) {
+  return path.join(process.cwd(), ...filePath);
+}
+
+const pkg = require(getProjectPath('package.json'));
 
 module.exports = {
   entry: {
@@ -14,7 +21,7 @@ module.exports = {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
   },
-  devtool: 'source-map',
+  devtool: 'cheap-source-map',
   // it's important!!!
   externals: {
     react: {
@@ -28,6 +35,12 @@ module.exports = {
       commonjs2: 'react-dom',
       commonjs: 'react-dom',
       amd: 'react-dom',
+    },
+    moment: {
+      root: 'moment',
+      commonjs2: 'moment',
+      commonjs: 'moment',
+      amd: 'moment',
     },
   },
   resolve: {
@@ -47,9 +60,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
         },
       },
       {
@@ -74,10 +84,20 @@ module.exports = {
       },
     ],
   },
+  performance: {
+    hints: false,
+  },
   plugins: [
+    new webpack.BannerPlugin(`${pkg.name} v${pkg.version}`),
+    new WebpackBar({
+      name: '🚚 iron UI',
+      color: '#3db12f',
+    }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
       openAnalyzer: false,
+      reportFilename: '../report.html',
     }),
   ],
 };
