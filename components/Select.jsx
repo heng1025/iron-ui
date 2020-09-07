@@ -223,7 +223,7 @@ export const VirtualSelect = forwardRef((props, ref) => {
         }}
       />
       {searchVisible && (
-        <div style={optionContainerStyle} className={styles.options} a="12">
+        <div style={optionContainerStyle} className={styles.options}>
           {optionTitle}
           <Options
             selected={selectedValue}
