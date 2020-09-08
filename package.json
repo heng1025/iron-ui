@@ -27,7 +27,7 @@
   "homepage": "https://ui.chenggang.win",
   "scripts": {
     "build-es": "babel --env-name es --config-file ./babel.esm.js -d es/ components",
-    "build-es-less": "lessc components/index.less es/index.css",
+    "build-style": "lessc components/style/index.less es/index.css",
     "build": "rimraf es/ && yarn build-es",
     "dist": "webpack",
     "storybook": "start-storybook -p 6008",
