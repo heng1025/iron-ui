@@ -4,7 +4,7 @@ import Empty from 'antd/es/empty';
 import Spin from 'antd/es/spin';
 import VList from 'react-virtualized/dist/es/List';
 import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
-import styles from './index.less';
+import './style/index.less';
 
 function VRow({ children: child, style, selected, className, onClick }) {
   const {
@@ -14,7 +14,7 @@ function VRow({ children: child, style, selected, className, onClick }) {
     title,
   } = child.props;
   const label = typeof text === 'string' ? text : val;
-  const activeClass = child.key === selected ? styles.active : '';
+  const activeClass = child.key === selected ? 'active' : '';
   return React.cloneElement(child, {
     style,
     title: title || label,
@@ -73,23 +73,3 @@ export function Options({
     </AutoSizer>
   );
 }
-
-export const Title = ({ value }) => <span className="text">{value}</span>;
-
-export const VListWithDynamic = forwardRef(
-  ({ rowCount, className, rowHeight, rowRenderer }, ref) => (
-    <AutoSizer>
-      {({ height, width }) => (
-        <VList
-          ref={ref}
-          width={width}
-          height={height}
-          rowHeight={rowHeight}
-          rowCount={rowCount}
-          className={className}
-          rowRenderer={rowRenderer}
-        />
-      )}
-    </AutoSizer>
-  )
-);

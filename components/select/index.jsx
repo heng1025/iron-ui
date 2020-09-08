@@ -9,10 +9,9 @@ import debounce from 'lodash/debounce';
 import classNames from 'classnames';
 import Icon from 'antd/es/icon';
 import Input from 'antd/es/input';
-import { Options } from './Common';
-import styles from './index.less';
+import { Options } from './common';
 
-export const VirtualSelect = forwardRef((props, ref) => {
+const VirtualSelect = forwardRef((props, ref) => {
   const {
     value,
     onChange,
@@ -150,7 +149,7 @@ export const VirtualSelect = forwardRef((props, ref) => {
     <div
       ref={selectRef}
       style={style}
-      className={classNames(styles.container, props.className)}
+      className={classNames('iron-select-container', props.className)}
       onMouseEnter={() => {
         if (label && allowClear && !disabled) {
           setCloseIconVisible(true);
@@ -169,7 +168,7 @@ export const VirtualSelect = forwardRef((props, ref) => {
         onChange={onChangeInput}
         placeholder={label || placeholder}
         suffix={!suffix && <Icon type="up" />}
-        className="v-select-input"
+        className="iron-select-input"
         style={{ display: searchVisible ? 'inline-block' : 'none' }}
       />
       <Input
@@ -179,8 +178,8 @@ export const VirtualSelect = forwardRef((props, ref) => {
         disabled={disabled}
         value={label}
         className={classNames(
-          'v-select-input',
-          showSearch ? 'v-select-default' : ''
+          'iron-select-input',
+          showSearch ? 'iron-select-default' : ''
         )}
         style={{ display: !searchVisible ? 'inline-block' : 'none' }}
         suffix={
@@ -223,11 +222,11 @@ export const VirtualSelect = forwardRef((props, ref) => {
         }}
       />
       {searchVisible && (
-        <div style={optionContainerStyle} className={styles.options}>
+        <div style={optionContainerStyle} className="iron-select-options">
           {optionTitle}
           <Options
             selected={selectedValue}
-            className={styles['option-item']}
+            className="iron-select-option-item"
             loading={loading}
             onClick={handleClick}
           >
@@ -238,3 +237,5 @@ export const VirtualSelect = forwardRef((props, ref) => {
     </div>
   );
 });
+
+export default VirtualSelect;

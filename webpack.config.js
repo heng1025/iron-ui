@@ -59,10 +59,17 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        include: [path.resolve(__dirname, 'components')],
+        include: [
+          path.resolve(__dirname, 'components'),
+          path.resolve(__dirname, 'utils'),
+        ],
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            configFile: false, // exclude babel.confi.js
+            presets: ['@babel/preset-react'],
+          },
         },
       },
       {
@@ -78,20 +85,7 @@ module.exports = {
       {
         test: /\.less$/,
         exclude: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[local]--[hash:base64:5]',
-              },
-            },
-          },
-          {
-            loader: 'less-loader',
-          },
-        ],
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },

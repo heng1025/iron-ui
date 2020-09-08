@@ -24,12 +24,10 @@
   ],
   "homepage": "https://ui.chenggang.win",
   "scripts": {
-    "build-es": "export NODE_ENV='es' && babel components --out-dir es/ && yarn build-es-less",
+    "build-es": "babel --env-name es --config-file ./babel.esm.js -d es/ components",
     "build-es-less": "lessc components/index.less es/index.css",
-    "build-lib": "babel components --out-dir lib/ && yarn build-lib-less",
-    "build-lib-less": "lessc components/index.less lib/index.css",
-    "build": "rimraf es/ lib/  && yarn build-es && yarn build-lib",
-    "dist": "export NODE_ENV='dist' && webpack",
+    "build": "rimraf es/ && yarn build-es",
+    "dist": "webpack",
     "storybook": "start-storybook -p 6008",
     "build-storybook": "build-storybook -s public"
   },

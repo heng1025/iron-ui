@@ -14,8 +14,9 @@ function transformImportLess2Css() {
 
 module.exports = function (api) {
   const env = api.env();
-  // console.log('env', env);
+  console.log('=====env=====', env);
   api.cache(true);
+  // just es/lib required
   const plugins = [transformImportLess2Css];
   const presets = [
     [
@@ -37,5 +38,5 @@ module.exports = function (api) {
     '@babel/preset-react',
   ];
 
-  return { presets, plugins: env !== 'dist' ? plugins : [] };
+  return { presets, plugins };
 };

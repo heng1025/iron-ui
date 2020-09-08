@@ -1,0 +1,55 @@
+.ReactVirtualized__Grid {
+  &:focus {
+    outline: none;
+  }
+}
+
+.iron-select-container {
+  position: relative;
+  .iron-select-input {
+    input {
+      cursor: pointer;
+    }
+    &.iron-select-default {
+      input {
+        cursor: default;
+      }
+    }
+  }
+  .ant-input-suffix {
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    .icon-close {
+      cursor: pointer;
+    }
+  }
+}
+
+.iron-select-options {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  z-index: 900;
+  width: 100%;
+  color: #000000a6;
+  line-height: 1;
+  text-align: left;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  .iron-select-option-item {
+    padding: 0 6px;
+    overflow: hidden;
+    line-height: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    cursor: pointer;
+    &.active {
+      font-weight: bold;
+      background-color: #e6f9ff;
+    }
+    &:hover {
+      background-color: #e6f9ff;
+    }
+  }
+}

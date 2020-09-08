@@ -9,18 +9,7 @@ module.exports = {
     // change webpack config
     config.module.rules.push({
       test: /\.less$/,
-      loaders: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-          },
-        },
-        {
-          loader: 'less-loader',
-        },
-      ],
+      loaders: ['style-loader', 'css-loader', 'less-loader'],
     });
 
     return config;

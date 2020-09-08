@@ -1,9 +1,9 @@
 import React, { useMemo, useEffect, useRef } from 'react';
 import Icon from 'antd/es/icon';
 import Checkbox from 'antd/es/checkbox';
-import { VListWithDynamic, Title } from './Common';
 
-import styles from './index.less';
+import { VListWithDynamic, Title } from './utils';
+import './style/index.less';
 
 const ROW_HEIGHT = 26;
 
@@ -91,7 +91,7 @@ const getCheckedNodes = (trees, checkedNodes = [], checkedKeys = []) => {
   return { checkedKeys, checkedNodes };
 };
 
-export function VirtualTree({
+function VirtualTree({
   treeData = [],
   checkable,
   rowClassName,
@@ -163,7 +163,7 @@ export function VirtualTree({
   return (
     <VListWithDynamic
       ref={listRef}
-      className={styles.tree}
+      className="iron-tree"
       rowCount={trees.length}
       rowHeight={({ index }) => getExpandedItemCount(trees[index]) * ROW_HEIGHT}
       rowRenderer={cellRenderer}
@@ -197,7 +197,7 @@ const TreeNode = ({ checkable, node, children, onExpand, onCheck }) => {
     <div style={{ height: ROW_HEIGHT, lineHeight: `${ROW_HEIGHT}px` }}>
       <span
         onClick={handleExpand}
-        className={styles.switch}
+        className="iron-tree-switch"
         style={{
           opacity: node.children ? 1 : 0,
         }}
@@ -215,7 +215,7 @@ const TreeNode = ({ checkable, node, children, onExpand, onCheck }) => {
           onChange={handleCheck}
         />
       )}
-      <span className="tree-title">
+      <span className="iron-tree-title">
         <Title {...node} />
       </span>
       {children}
@@ -224,3 +224,5 @@ const TreeNode = ({ checkable, node, children, onExpand, onCheck }) => {
 };
 
 VirtualTree.TreeNode = TreeNode;
+
+export default VirtualTree;

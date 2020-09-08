@@ -8,10 +8,9 @@ import React, {
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
 import Input from 'antd/es/input';
-import { Options } from './Common';
-import styles from './index.less';
+import { Options } from '../select/common';
 
-export const VirtualAutoComplete = forwardRef((props, ref) => {
+const VirtualAutoComplete = forwardRef((props, ref) => {
   const {
     value,
     onChange,
@@ -110,7 +109,7 @@ export const VirtualAutoComplete = forwardRef((props, ref) => {
   return (
     <div
       style={style}
-      className={classNames(styles.container, props.className)}
+      className={classNames('iron-select-container', props.className)}
       ref={selectRef}
     >
       <Input
@@ -133,10 +132,10 @@ export const VirtualAutoComplete = forwardRef((props, ref) => {
         }}
       />
       {searchVisible && (
-        <div style={optionContainerStyle} className={styles.options}>
+        <div style={optionContainerStyle} className="iron-select-options">
           {optionTitle}
           <Options
-            className={styles['option-item']}
+            className="iron-select-option-item"
             selected={selectedValue}
             loading={loading}
             onClick={handleClick}
@@ -148,3 +147,5 @@ export const VirtualAutoComplete = forwardRef((props, ref) => {
     </div>
   );
 });
+
+export default VirtualAutoComplete;
