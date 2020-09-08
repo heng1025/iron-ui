@@ -1,9 +1,9 @@
 // build dist
-// https://webpack.js.org/guides/author-libraries/#authoring-a-library
 const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// Attention: https://github.com/webpack-contrib/mini-css-extract-plugin/issues/386
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -16,14 +16,15 @@ const pkg = require(getProjectPath('package.json'));
 
 module.exports = {
   entry: {
-    index: './components/index.jsx',
+    'iron-ui': ['./components/style/index.less', './components/index.jsx'],
   },
-  mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name].min.js',
+    // https://webpack.js.org/guides/author-libraries/#authoring-a-library
     libraryTarget: 'commonjs2',
   },
+  mode: 'production',
   devtool: 'cheap-source-map',
   // it's important!!!
   externals: {
@@ -67,25 +68,23 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            configFile: false, // exclude babel.confi.js
             presets: ['@babel/preset-react'],
           },
         },
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-        ],
+        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.less$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader',
+        ],
       },
     ],
   },
@@ -95,12 +94,12 @@ module.exports = {
   plugins: [
     new webpack.BannerPlugin(`${pkg.name} v${pkg.version}`),
     new WebpackBar({
-      name: '🚚 iron UI',
+      name: '🚚 iron ui',
       color: '#3db12f',
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].min.css',
       chunkFilename: '[id].css',
     }),
     new CssMinimizerPlugin({

@@ -3,7 +3,6 @@ import Icon from 'antd/es/icon';
 import Checkbox from 'antd/es/checkbox';
 
 import { VListWithDynamic, Title } from './utils';
-import './style/index.less';
 
 const ROW_HEIGHT = 26;
 

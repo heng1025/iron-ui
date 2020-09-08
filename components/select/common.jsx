@@ -1,10 +1,9 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import Empty from 'antd/es/empty';
 import Spin from 'antd/es/spin';
 import VList from 'react-virtualized/dist/es/List';
 import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
-import './style/index.less';
 
 function VRow({ children: child, style, selected, className, onClick }) {
   const {
