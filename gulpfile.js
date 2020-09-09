@@ -1,30 +1,22 @@
-const path = require('path');
+const fs = require('fs');
 const gulp = require('gulp');
-const merge2 = require('merge2');
-const babel = require('gulp-babel');
 const webpack = require('webpack');
 const rimraf = require('rimraf');
 const through2 = require('through2');
+const merge2 = require('merge2');
+const babel = require('gulp-babel');
 const getWebpackConfig = require('./script/getWebpackConfig');
 const getBabelCommonConfig = require('./script/getBabelCommonConfig');
-const { getProjectPath, mergeStyle, transformLess } = require('./script/utils');
+const { getProjectPath, transformLess } = require('./script/utils');
 
 const libDir = getProjectPath('lib');
 const esDir = getProjectPath('es');
 const distDir = getProjectPath('dist');
 
-function dist(done) {
+function compileDist(done) {
   rimraf.sync(distDir);
 
-  const tempFile = getProjectPath('components', 'style', 'components.less');
-  mergeStyle(tempFile);
-
   const webpackConfig = getWebpackConfig();
-
-  Object.keys(webpackConfig.entry).forEach((entryName) => {
-    webpackConfig.entry[entryName].push(tempFile);
-  });
-
   webpack(webpackConfig, (err, stats) => {
     if (err) {
       console.error(err.stack || err);
@@ -44,13 +36,22 @@ function dist(done) {
       console.warn('warn', info.warnings);
     }
 
-    done(0);
+    const buildInfo = stats.toString({
+      colors: true,
+      children: true,
+      chunks: false,
+      modules: false,
+      chunkModules: false,
+      hash: false,
+      version: false,
+    });
+    console.log(buildInfo);
 
-    rimraf.sync(tempFile);
+    done(0);
   });
 }
 
-function compileLess(modules, dir) {
+function compileLess(dir) {
   const less = gulp
     .src(['components/**/*.less'])
     .pipe(
@@ -93,7 +94,7 @@ function babelify(modules, dir) {
 function compile(modules) {
   const destDir = modules === false ? esDir : libDir;
   rimraf.sync(destDir);
-  const less = compileLess(modules, destDir);
+  const less = compileLess(destDir);
   const jsFilesStream = babelify(modules, destDir);
 
   return merge2([less, jsFilesStream]);
@@ -109,14 +110,9 @@ gulp.task('compile-with-lib', (done) => {
   compile().on('finish', done);
 });
 
+gulp.task('compile-with-dist', gulp.series(compileDist));
+
 gulp.task(
   'build',
   gulp.series(gulp.parallel('compile-with-es', 'compile-with-lib'))
-);
-
-gulp.task(
-  'dist',
-  gulp.series((done) => {
-    dist(done);
-  })
 );

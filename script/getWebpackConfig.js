@@ -11,15 +11,17 @@ const { getProjectPath } = require('./utils');
 const pkg = require(getProjectPath('package.json'));
 
 function getWebpackConfig() {
+  console.log(getProjectPath('index.js'));
   const config = {
     entry: {
-      'iron-ui.min': [getProjectPath('components/index.jsx')],
+      [`${pkg.name}.min`]: [getProjectPath('index')],
     },
     output: {
       path: getProjectPath('dist'),
       filename: '[name].js',
       // https://webpack.js.org/guides/author-libraries/#authoring-a-library
-      libraryTarget: 'commonjs2',
+      library: pkg.name,
+      libraryTarget: 'umd',
     },
     mode: 'production',
     devtool: 'cheap-source-map',
@@ -37,12 +39,6 @@ function getWebpackConfig() {
         commonjs: 'react-dom',
         amd: 'react-dom',
       },
-      moment: {
-        root: 'moment',
-        commonjs2: 'moment',
-        commonjs: 'moment',
-        amd: 'moment',
-      },
     },
     resolve: {
       alias: {
@@ -51,10 +47,11 @@ function getWebpackConfig() {
       extensions: ['.js', '.jsx'],
     },
     module: {
+      noParse: [/moment.js/],
       rules: [
         {
           test: /\.jsx?$/,
-          include: [getProjectPath('components'), getProjectPath('utils')],
+          include: [getProjectPath('components')],
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
@@ -85,7 +82,7 @@ function getWebpackConfig() {
     plugins: [
       new webpack.BannerPlugin(`${pkg.name} v${pkg.version}`),
       new WebpackBar({
-        name: '🚚 iron ui',
+        name: '🚚 iron ui script',
         color: '#3db12f',
       }),
       new MiniCssExtractPlugin({

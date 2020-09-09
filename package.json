@@ -1,6 +1,6 @@
 {
   "name": "iron-ui",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "A react UI Library",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -27,7 +27,7 @@
   ],
   "homepage": "https://ui.chenggang.win",
   "scripts": {
-    "dist": "gulp dist",
+    "dist": "gulp compile-with-dist",
     "compile": "gulp build",
     "storybook": "start-storybook -p 6008",
     "build-storybook": "build-storybook -s public"
@@ -72,8 +72,12 @@
   },
   "bundlesize": [
     {
-      "path": "./dist/index.js",
+      "path": "./dist/iron-ui.min.js",
       "maxSize": "300 kB"
+    },
+    {
+      "path": "./dist/iron-ui.min.css",
+      "maxSize": "20 kB"
     }
   ]
 }
