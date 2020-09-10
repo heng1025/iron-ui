@@ -19,13 +19,6 @@ const Template = (args) => (
 export default {
   title: 'Components/VirtualSelect',
   component: VirtualSelect,
-  decorators: [
-    (Story) => (
-      <div style={{ width: 300 }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const Primary = Template.bind({});

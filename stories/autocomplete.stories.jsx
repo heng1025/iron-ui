@@ -19,13 +19,6 @@ const Template = (args) => (
 export default {
   title: 'Components/VirtualAutoComplete',
   component: VirtualAutoComplete,
-  decorators: [
-    (Story) => (
-      <div style={{ width: 300 }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const Primary = Template.bind({});
@@ -38,4 +31,3 @@ Suffix.args = { ...Primary.args, suffix: <Icon type="search" /> };
 
 export const Disabled = Template.bind({});
 Disabled.args = { ...Primary.args, disabled: true, value: 'iron' };
-

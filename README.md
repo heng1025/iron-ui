@@ -33,12 +33,15 @@ import 'iron-ui/dist/iron-ui.min.css';
   'import',
   {
     libraryName: 'iron-ui',
+    // style: true, // if app support less
+    style: (name) => `${name}/style/index.css`,
     customName: (name) => {
+      const prefix = 'iron-ui/es';
       if (/virtual-(.*)/.test(name)) {
         const validName = name.replace(/virtual-(.*)/, '$1');
-        return `iron-ui/es/${validName.toLowerCase()}`;
+        return `${prefix}/${validName.toLowerCase()}`;
       }
-      return `iron-ui/es/${name}`;
+      return `${prefix}/${name}`;
     },
   },
 ];

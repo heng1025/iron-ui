@@ -6,6 +6,9 @@ module.exports = {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   // https://storybook.js.org/docs/react/api/writing-presets
   babel: async (config, options) => {
+    if (options.configType === 'PRODUCTION') {
+      return config;
+    }
     const { plugins = [] } = config;
     const libraryName = '../components';
     return {
