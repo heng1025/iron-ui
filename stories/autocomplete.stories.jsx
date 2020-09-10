@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
 import { VirtualAutoComplete } from '../components';
-import '../components/select/style/index.less';
 
 const options = [];
 for (let i = 0; i < 100000; i++) {

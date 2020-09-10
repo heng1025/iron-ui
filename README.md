@@ -8,25 +8,26 @@ yarn storybook
 
 ## local test
 
-- `npm link /path/to/testApp/node_modules/react`
+- [error solution](https://reactjs.org/warnings/invalid-hook-call-warning.html)
+- [error detail](https://github.com/facebook/react/issues/13991)
+- `npm link /path/to/testApp/node_modules/react` (it will conflict with storybook)
 
-- https://reactjs.org/warnings/invalid-hook-call-warning.html
+## antd icon import on demand
 
-- https://github.com/facebook/react/issues/13991
-
-## antd icon
-
-https://www.zhihu.com/question/308898834
+[antd-icon](https://www.zhihu.com/question/308898834)
 
 ## Use
+
 - Getting Started
+
 ```javascript
 import { VirtualSelect, VirtualAutoComplete, VirtualTree } from 'iron-ui';
-// load style
+// load all style
 import 'iron-ui/dist/iron-ui.min.css';
 ```
 
 - Import on Demand
+
 ```javascript
 [
   'import',

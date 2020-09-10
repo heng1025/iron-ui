@@ -5,13 +5,13 @@ const WebpackBar = require('webpackbar');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
+const getBabelCommonConfig = require('./getBabelCommonConfig');
 const { getProjectPath } = require('./utils');
 
 const pkg = require(getProjectPath('package.json'));
 
 function getWebpackConfig() {
-  console.log(getProjectPath('index.js'));
+  const babelConfig = getBabelCommonConfig();
   const config = {
     entry: {
       [`${pkg.name}.min`]: [getProjectPath('index')],
@@ -55,9 +55,7 @@ function getWebpackConfig() {
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-react'],
-            },
+            options: babelConfig,
           },
         },
         {

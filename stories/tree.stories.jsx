@@ -1,6 +1,5 @@
 import React from 'react';
 import { VirtualTree } from '../components';
-import '../components/tree/style/index.less';
 
 function dig(path = '0', level = 2) {
   const list = [];

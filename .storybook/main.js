@@ -4,6 +4,34 @@ module.exports = {
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  // https://storybook.js.org/docs/react/api/writing-presets
+  babel: async (config, options) => {
+    const { plugins = [] } = config;
+    const libraryName = '../components';
+    return {
+      ...config,
+      // babel-loader property
+      // only debugging (override default value)
+      // cacheDirectory: false,
+      plugins: [
+        ...plugins,
+        [
+          'import',
+          {
+            libraryName,
+            style: true,
+            customName: (name) => {
+              if (/virtual-(.*)/.test(name)) {
+                const validName = name.replace(/virtual-(.*)/, '$1');
+                return `${libraryName}/${validName.toLowerCase()}`;
+              }
+              return `${libraryName}/${name}`;
+            },
+          },
+        ],
+      ],
+    };
+  },
   webpackFinal: async (config, options) => {
     // console.log('config', config);
     // change webpack config
