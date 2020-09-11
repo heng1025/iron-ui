@@ -19,6 +19,13 @@ const Template = (args) => (
 export default {
   title: 'Components/VirtualAutoComplete',
   component: VirtualAutoComplete,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 300 }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Primary = Template.bind({});

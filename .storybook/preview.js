@@ -6,7 +6,7 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <div style={{ width: 300 }}>
+    <div style={{ margin: '2em' }}>
       <Story />
     </div>
   ),
