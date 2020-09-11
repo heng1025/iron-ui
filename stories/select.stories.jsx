@@ -26,6 +26,11 @@ export default {
       </div>
     ),
   ],
+  parameters: {
+    actions: {
+      handles: ['click .iron-select-option-item'],
+    },
+  },
 };
 
 export const Primary = Template.bind({});
