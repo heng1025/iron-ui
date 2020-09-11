@@ -16,7 +16,7 @@ yarn storybook
 
 [antd-icon](https://www.zhihu.com/question/308898834)
 
-## Use
+## Usage
 
 - Getting Started
 

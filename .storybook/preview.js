@@ -1,4 +1,10 @@
 import React from 'react';
+// prettier-ignore
+const req = require.context('../components', true, /^\.\/[^_][\w-]+\/style\/index\.jsx?$/);
+// dynamic import style
+req.keys().forEach((filename) => {
+  req(filename);
+});
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
