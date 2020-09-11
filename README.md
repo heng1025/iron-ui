@@ -46,3 +46,8 @@ import 'iron-ui/dist/iron-ui.min.css';
   },
 ];
 ```
+
+## Thanks
+
+- [ant-design](https://github.com/ant-design/ant-design)
+- [antd-tools](https://github.com/ant-design/antd-tools)

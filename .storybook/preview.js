@@ -1,7 +1,7 @@
 import React from 'react';
 // prettier-ignore
 const req = require.context('../components', true, /^\.\/[^_][\w-]+\/style\/index\.jsx?$/);
-// dynamic import style
+// dynamic import component style
 req.keys().forEach((filename) => {
   req(filename);
 });
