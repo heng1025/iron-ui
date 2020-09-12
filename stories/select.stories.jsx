@@ -31,21 +31,42 @@ export default {
       handles: ['click .iron-select-option-item'],
     },
   },
+  argTypes: {
+    placeholder: {
+      name: 'placeholder',
+      description: 'string',
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      description: 'boolean',
+    },
+    allowClear: {
+      description: 'boolean',
+    },
+    showSearch: {
+      description: 'boolean',
+    },
+  },
+  args: {
+    placeholder: 'please select',
+    disabled: false,
+    allowClear: false,
+    showSearch: false,
+  },
 };
 
 export const Primary = Template.bind({});
-Primary.args = {
-  placeholder: 'please select',
-};
 
 export const Suffix = Template.bind({});
-Suffix.args = { ...Primary.args, suffix: <Icon type="search" /> };
+Suffix.args = { suffix: <Icon type="search" /> };
 
 export const Search = Template.bind({});
-Search.args = { ...Primary.args, showSearch: true };
+Search.args = { showSearch: true };
 
 export const Disabled = Template.bind({});
-Disabled.args = { ...Primary.args, disabled: true, value: 'iron' };
+Disabled.args = { disabled: true, value: 'iron' };
 
 export const Clear = Template.bind({});
-Clear.args = { ...Primary.args, allowClear: true };
+Clear.args = { allowClear: true };
