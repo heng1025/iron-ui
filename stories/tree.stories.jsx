@@ -33,19 +33,16 @@ export default {
   ],
 };
 
-export const Primary = () => <VirtualTree treeData={treeData} />;
+export const Primary = (args) => <VirtualTree {...args} treeData={treeData} />;
 
-export const Checkable = () => (
-  <VirtualTree
-    checkable
-    treeData={treeData}
-    onCheck={(checkedKeys, info) => {
-      console.log('Checkable -> info', info);
-      console.log('Checkable -> checkedKeys', checkedKeys);
-    }}
-  />
-);
+export const Checkable = Primary.bind();
+Checkable.args = {
+  checkable: true,
+  onCheck: (checkedKeys, info) => {
+    console.log('Checkable -> info', info);
+    console.log('Checkable -> checkedKeys', checkedKeys);
+  },
+};
 
-export const DefaultExpandAll = () => (
-  <VirtualTree defaultExpandAll treeData={treeData} />
-);
+export const DefaultExpandAll = Primary.bind();
+DefaultExpandAll.args = { defaultExpandAll: true };

@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import Icon from 'antd/es/icon';
 import Checkbox from 'antd/es/checkbox';
 
@@ -223,5 +224,19 @@ const TreeNode = ({ checkable, node, children, onExpand, onCheck }) => {
 };
 
 VirtualTree.TreeNode = TreeNode;
+
+VirtualTree.propTypes = {
+  treeData: PropTypes.array,
+  checkable: PropTypes.bool,
+  rowClassName: PropTypes.string,
+  defaultExpandAll: PropTypes.bool,
+  checkedKeys: PropTypes.array,
+  onCheck: PropTypes.func,
+};
+
+VirtualTree.defaultProps = {
+  checkable: false,
+  defaultExpandAll: false,
+};
 
 export default VirtualTree;

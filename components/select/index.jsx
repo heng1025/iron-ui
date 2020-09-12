@@ -5,6 +5,7 @@ import React, {
   useRef,
   useCallback,
 } from 'react';
+import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
 import Icon from 'antd/es/icon';
@@ -237,5 +238,61 @@ const VirtualSelect = forwardRef((props, ref) => {
     </div>
   );
 });
+
+VirtualSelect.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  /**
+   * Current selected option
+   */
+  value: PropTypes.string,
+  /**
+   * Called when select an option or input value change
+   */
+  onChange: PropTypes.func,
+  /**
+   * Show clear button
+   */
+  allowClear: PropTypes.bool,
+  style: PropTypes.object,
+  optionContainerStyle: PropTypes.object,
+  optionTitle: PropTypes.element,
+  /**
+   * Indicate loading state
+   */
+  loading: PropTypes.bool,
+  /**
+   *
+   */
+  showSearch: PropTypes.bool,
+  disabled: PropTypes.bool,
+  /**
+   * Placeholder of select
+   */
+  placeholder: PropTypes.string,
+  /**
+   * The function will receive two arguments,
+   * inputValue and option, if the function returns true,
+   * the option will be included in the filtered set;
+   * Otherwise, it will be excluded
+   */
+  filterOption: PropTypes.func,
+  onSearch: PropTypes.func,
+  /**
+   * Called when focus
+   */
+  onFocus: PropTypes.func,
+  /**
+   * The custom suffix icon
+   */
+  suffix: PropTypes.element,
+};
+
+VirtualSelect.defaultProps = {
+  allowClear: false,
+  loading: false,
+  showSearch: false,
+  disabled: false,
+  placeholder: 'please select',
+};
 
 export default VirtualSelect;

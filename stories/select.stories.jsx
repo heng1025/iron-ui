@@ -2,20 +2,6 @@ import React from 'react';
 import { Icon } from 'antd';
 import { VirtualSelect } from '../components';
 
-const options = [];
-for (let i = 0; i < 100000; i++) {
-  const value = `${i.toString(36)}${i}`;
-  options.push(value);
-}
-
-const Template = (args) => (
-  <VirtualSelect {...args}>
-    {options.map((v) => (
-      <div key={v}>{v}</div>
-    ))}
-  </VirtualSelect>
-);
-
 export default {
   title: 'Components/VirtualSelect',
   component: VirtualSelect,
@@ -31,43 +17,31 @@ export default {
       handles: ['click .iron-select-option-item'],
     },
   },
-  argTypes: {
-    placeholder: {
-      name: 'placeholder',
-      description: 'string',
-      control: {
-        type: 'text',
-      },
-    },
-    disabled: {
-      description: 'boolean',
-    },
-    allowClear: {
-      description: 'boolean',
-    },
-    showSearch: {
-      description: 'boolean',
-    },
-  },
-  args: {
-    placeholder: 'please select',
-    disabled: false,
-    allowClear: false,
-    showSearch: false,
-  },
 };
 
-export const Primary = Template.bind({});
-Primary.storyName='I am the primary';
+const options = [];
 
-export const Suffix = Template.bind({});
+for (let i = 0; i < 100000; i++) {
+  const value = `${i.toString(36)}${i}`;
+  options.push(value);
+}
+
+export const Primary = (args) => (
+  <VirtualSelect {...args}>
+    {options.map((v) => (
+      <div key={v}>{v}</div>
+    ))}
+  </VirtualSelect>
+);
+
+export const Suffix = Primary.bind();
 Suffix.args = { suffix: <Icon type="search" /> };
 
-export const Search = Template.bind({});
+export const Search = Primary.bind();
 Search.args = { showSearch: true };
 
-export const Disabled = Template.bind({});
+export const Disabled = Primary.bind();
 Disabled.args = { disabled: true, value: 'iron' };
 
-export const Clear = Template.bind({});
+export const Clear = Primary.bind();
 Clear.args = { allowClear: true };
