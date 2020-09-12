@@ -58,6 +58,7 @@ export default {
 };
 
 export const Primary = Template.bind({});
+Primary.storyName='I am the primary';
 
 export const Suffix = Template.bind({});
 Suffix.args = { suffix: <Icon type="search" /> };
