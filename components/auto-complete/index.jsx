@@ -22,7 +22,7 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
     placeholder = 'Please input',
     suffix,
     filterOption,
-    isFixedMode,
+    fixedMode,
     optionContainerStyle,
     optionTitle, // ReactNode
     onFocus,
@@ -70,11 +70,11 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
   useEffect(() => {
     setSearchValue(value);
     if (children.length > 0) {
-      queryOptions(value, children, filterOption, isFixedMode);
+      queryOptions(value, children, filterOption, fixedMode);
     } else {
       setFilterList([]);
     }
-  }, [value, children, isFixedMode]);
+  }, [value, children, fixedMode]);
 
   useEffect(() => {
     const optionWrap = selectRef.current;
@@ -167,6 +167,7 @@ VirtualAutoComplete.propTypes = {
    */
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
+  fixedMode: PropTypes.bool,
   placeholder: PropTypes.string,
   /**
    * The function will receive two arguments,
@@ -174,7 +175,7 @@ VirtualAutoComplete.propTypes = {
    * the option will be included in the filtered set;
    * Otherwise, it will be excluded
    */
-  filterOption:PropTypes.func,
+  filterOption: PropTypes.func,
   /**
    * Called when focus
    */

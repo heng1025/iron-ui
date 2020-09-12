@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import Icon from 'antd/es/icon';
 import { VirtualAutoComplete } from '../components';
 
 const options = [];

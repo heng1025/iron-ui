@@ -223,7 +223,13 @@ const VirtualSelect = forwardRef((props, ref) => {
         }}
       />
       {searchVisible && (
-        <div style={optionContainerStyle} className="iron-select-options">
+        <div
+          style={optionContainerStyle}
+          className={classNames(
+            'iron-select-options',
+            filterList.length === 0 ? 'empty' : ''
+          )}
+        >
           {optionTitle}
           <Options
             selected={selectedValue}
@@ -274,9 +280,14 @@ VirtualSelect.propTypes = {
    * inputValue and option, if the function returns true,
    * the option will be included in the filtered set;
    * Otherwise, it will be excluded
+   *
    */
-  filterOption: PropTypes.func,
-  onSearch: PropTypes.func,
+  filterOption: function (input, option) {},
+  /**
+   *
+   * @param {*} input string
+   */
+  onSearch: function (input) {},
   /**
    * Called when focus
    */

@@ -1,6 +1,13 @@
 import React from 'react';
-import { Icon } from 'antd';
+import Icon from 'antd/es/icon';
 import { VirtualSelect } from '../components';
+
+const options = [];
+
+for (let i = 0; i < 10000; i++) {
+  const value = `${i.toString(36)}${i}`;
+  options.push(value);
+}
 
 export default {
   title: 'Components/VirtualSelect',
@@ -17,14 +24,15 @@ export default {
       handles: ['click .iron-select-option-item'],
     },
   },
+  argTypes: {
+    children: {
+      control: null,
+    },
+    suffix: {
+      control: null,
+    },
+  },
 };
-
-const options = [];
-
-for (let i = 0; i < 100000; i++) {
-  const value = `${i.toString(36)}${i}`;
-  options.push(value);
-}
 
 export const Primary = (args) => (
   <VirtualSelect {...args}>
@@ -39,6 +47,10 @@ Suffix.args = { suffix: <Icon type="search" /> };
 
 export const Search = Primary.bind();
 Search.args = { showSearch: true };
+// exclude onSearch action
+Search.parameters = {
+  actions: null,
+};
 
 export const Disabled = Primary.bind();
 Disabled.args = { disabled: true, value: 'iron' };
