@@ -10,14 +10,22 @@ for (let i = 0; i < 10000; i++) {
 }
 
 describe('VirtualSelect', () => {
-  it('render success', () => {
-    const wrapper = render(
-      <VirtualSelect>
+  function genSelect(args) {
+    return (
+      <VirtualSelect {...args}>
         {options.map((v) => (
           <div key={v}>{v}</div>
         ))}
       </VirtualSelect>
     );
+  }
+  it('render success', () => {
+    const wrapper = render(genSelect());
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders disabled select correctly', () => {
+    const wrapper = render(genSelect({ disabled: true }));
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -29,7 +29,7 @@
   "scripts": {
     "dist": "gulp compile-with-dist",
     "compile": "gulp build",
-    "test": "jest --no-cache",
+    "test": "jest --watch",
     "storybook": "start-storybook --ci -p 6008",
     "build-storybook": "build-storybook -s public"
   },
