@@ -50,7 +50,7 @@ const updateSubNodeState = (nodes, checked) => {
 
 const updateSupNodeState = (parentNode, checked) => {
   const isNotEqual = parentNode.children.some(
-    (item) => item.checked !== checked
+    (item) => item.checked !== checked || item.indeterminate
   );
   if (isNotEqual) {
     parentNode.checked = false;
