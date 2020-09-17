@@ -1,9 +1,5 @@
 module.exports = {
-  extends: [
-    'airbnb',
-    'prettier',
-    'plugin:react/recommended',
-  ],
+  extends: ['airbnb', 'prettier', 'plugin:react/recommended'],
   env: {
     browser: true,
     node: true,
@@ -35,7 +31,8 @@ module.exports = {
     'react-hooks/rules-of-hooks': 2, // Checks rules of Hooks
     'import/extensions': 0,
     'import/no-cycle': 0,
-    'comma-dangle': ['error', 'always-multiline'],
+    'import/prefer-default-export': 0,
+    // 'comma-dangle': ['error', 'always-multiline'],
     'consistent-return': 0, // TODO: remove later
     'no-param-reassign': 0, // TODO: remove later
     'no-underscore-dangle': 0,

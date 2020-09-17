@@ -36,10 +36,10 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
   const [filterList, setFilterList] = useState([]);
 
   const queryOptions = useCallback(
-    debounce((inputVal, list, condition, fixedMode) => {
+    debounce((inputVal, list, condition, isFixed) => {
       if (inputVal) {
         const formatInput = decodeURIComponent(inputVal).toLowerCase();
-        if (fixedMode) {
+        if (isFixed) {
           const matchValue = list.find((item) => {
             const { value: text = item.key } = item.props;
             const formatVal = String(text).toLowerCase();

@@ -100,6 +100,7 @@ function VirtualTree({
   onCheck,
 }) {
   const listRef = useRef(null);
+
   const trees = useMemo(() => {
     const rawData = JSON.stringify(treeData);
     return transformTreeData(JSON.parse(rawData), defaultExpandAll);
@@ -109,16 +110,16 @@ function VirtualTree({
     defaultExpandAll,
   ]);
 
+  function refreshList() {
+    listRef.current.recomputeRowHeights();
+    listRef.current.forceUpdate();
+  }
+
   // update node state
   useEffect(() => {
     updateTreeNodeState(trees, checkedKeys);
     refreshList();
   }, [checkedKeys]);
-
-  function refreshList() {
-    listRef.current.recomputeRowHeights();
-    listRef.current.forceUpdate();
-  }
 
   function renderItem(item, deepness = 0) {
     let nodes = [];
@@ -202,6 +203,7 @@ const TreeNode = ({ checkable, node, children, onExpand, onCheck }) => {
     <div style={{ height: ROW_HEIGHT, lineHeight: `${ROW_HEIGHT}px` }}>
       <span
         onClick={handleExpand}
+        aria-hidden="true"
         className="iron-tree-switch"
         style={{
           opacity: node.children ? 1 : 0,

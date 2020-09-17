@@ -193,6 +193,7 @@ const VirtualSelect = forwardRef((props, ref) => {
             {allowClear && !disabled && label && (
               <span
                 className="icon-close"
+                aria-hidden="true"
                 style={{ display: closeIconVisible ? 'inline-block' : 'none' }}
                 onClick={() => {
                   setLabel('');
@@ -282,12 +283,12 @@ VirtualSelect.propTypes = {
    * Otherwise, it will be excluded
    *
    */
-  filterOption: function (input, option) {},
+  filterOption: PropTypes.func,
   /**
    *
    * @param {*} input string
    */
-  onSearch: function (input) {},
+  onSearch: PropTypes.func,
   /**
    * Called when focus
    */
