@@ -6,6 +6,12 @@ A React UI Library
 yarn storybook
 ```
 
+## test
+
+```
+yarn test
+```
+
 ## local test
 
 - [error solution](https://reactjs.org/warnings/invalid-hook-call-warning.html)
