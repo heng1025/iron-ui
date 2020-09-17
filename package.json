@@ -38,6 +38,7 @@
     "antd": "^3.26",
     "classnames": "^2.2.6",
     "lodash": "^4.17.20",
+    "prop-types": "^15.7.2",
     "react-virtualized": "^9.22.2"
   },
   "peerDependencies": {
@@ -76,7 +77,6 @@
     "less-plugin-npm-import": "^2.1.0",
     "merge2": "^1.4.1",
     "mini-css-extract-plugin": "^0.11.0",
-    "prop-types": "^15.7.2",
     "rimraf": "^3.0.2",
     "style-loader": "^1.2.1",
     "through2": "^4.0.2",

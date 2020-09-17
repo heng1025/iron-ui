@@ -3,7 +3,7 @@ import { VirtualTree } from '../components';
 
 function dig(path = '0', level = 2) {
   const list = [];
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 0; i < 2; i += 1) {
     const id = `${path}-${i}`;
     const treeNode = {
       value: id,
@@ -39,8 +39,8 @@ export const Checkable = Primary.bind();
 Checkable.args = {
   checkable: true,
   onCheck: (checkedKeys, info) => {
-    console.log('Checkable -> info', info);
-    console.log('Checkable -> checkedKeys', checkedKeys);
+    // console.log('Checkable -> info', info);
+    // console.log('Checkable -> checkedKeys', checkedKeys);
   },
 };
 

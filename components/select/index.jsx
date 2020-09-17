@@ -307,5 +307,3 @@ VirtualSelect.defaultProps = {
 };
 
 export default VirtualSelect;
-
-export { VirtualSelect };

@@ -100,8 +100,13 @@ function VirtualTree({
   onCheck,
 }) {
   const listRef = useRef(null);
-  const trees = useMemo(() => transformTreeData(treeData, defaultExpandAll), [
-    treeData,
+  const trees = useMemo(() => {
+    const rawData = JSON.stringify(treeData);
+    return transformTreeData(JSON.parse(rawData), defaultExpandAll);
+  }, [
+    // resolve referrence issue
+    JSON.stringify(treeData),
+    defaultExpandAll,
   ]);
 
   // update node state
