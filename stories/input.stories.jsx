@@ -19,3 +19,6 @@ export const Primary = (args) => {
 
 export const Suffix = Primary.bind();
 Suffix.args = { suffix: <Icon type="search" /> };
+
+export const Disabled = Primary.bind();
+Disabled.args = { disabled: true };
