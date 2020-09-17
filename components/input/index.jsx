@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Input = (props) => {
+const Input = ({ suffix, ...rest }) => {
   return (
-    <div className="iron-input">
-      <input {...props} />
+    <div className="iron-input-wrapper">
+      <input {...rest} className="iron-input" />
+      {suffix && <span className="iron-input-suffix">{suffix}</span>}
     </div>
   );
 };

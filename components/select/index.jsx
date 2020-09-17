@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
 import Icon from 'antd/es/icon';
-import Input from 'antd/es/input';
+import Input from '../input';
 import { Options } from './common';
 
 const VirtualSelect = forwardRef((props, ref) => {

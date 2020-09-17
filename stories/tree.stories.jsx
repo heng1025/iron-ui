@@ -1,5 +1,5 @@
 import React from 'react';
-import { VirtualTree } from '../components';
+import VirtualTree from '../components/tree';
 
 function dig(path = '0', level = 2) {
   const list = [];
@@ -39,8 +39,8 @@ export const Checkable = Primary.bind();
 Checkable.args = {
   checkable: true,
   onCheck: (checkedKeys, info) => {
-    // console.log('Checkable -> info', info);
-    // console.log('Checkable -> checkedKeys', checkedKeys);
+    console.log('Checkable -> info', info);
+    console.log('Checkable -> checkedKeys', checkedKeys);
   },
 };
 

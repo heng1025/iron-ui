@@ -1,9 +1,31 @@
-.iron-input {
-  height: 32px;
-  input {
+.iron-input-wrapper {
+  position: relative;
+  .iron-input {
+    width: 100%;
+    font-size: 14px;
     color: #000000a6;
-    &:focus {
-      outline: none;
+    padding: 6px 8px;
+    border: 1px solid #d9d9d9;
+    &::-webkit-input-placeholder {
+      color: #d9d9d9;
     }
+    &:hover {
+      border-color: #40a9ff;
+      border-right-width: 1px !important;
+    }
+    &:focus {
+      border-color: #40a9ff;
+      border-right-width: 1px !important;
+      outline: 0;
+      -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+  }
+  .iron-input-suffix {
+    position: absolute;
+    right: -6px;
+    top: 8px;
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 12px;
   }
 }

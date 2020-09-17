@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'antd/es/icon';
-import { VirtualSelect } from '../components';
+import VirtualSelect from '../components/select';
 
 const options = [];
 

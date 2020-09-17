@@ -8,7 +8,7 @@ import React, {
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
-import Input from 'antd/es/input';
+import Input from '../input';
 import { Options } from '../select/common';
 
 const VirtualAutoComplete = forwardRef((props, ref) => {

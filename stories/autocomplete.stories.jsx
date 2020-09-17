@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'antd/es/icon';
-import { VirtualAutoComplete } from '../components';
+import VirtualAutoComplete from '../components/auto-complete';
 
 const options = [];
 for (let i = 0; i < 100000; i++) {
