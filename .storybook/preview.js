@@ -13,7 +13,7 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <div style={{ minHeight: 200 }}>
+    <div style={{ width: 300, minHeight: 200 }}>
       <Story />
     </div>
   ),

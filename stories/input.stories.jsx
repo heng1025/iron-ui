@@ -4,13 +4,6 @@ import Input from '../components/input';
 
 export default {
   title: 'components/Input',
-  decorators: [
-    (Story) => (
-      <div style={{ width: 300 }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const Primary = (args) => {

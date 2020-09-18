@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Spin from 'antd/es/spin';
+import 'antd/es/spin/style/css';
 import VList from 'react-virtualized/dist/es/List';
 import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
 import Empty from '../empty';
@@ -36,6 +37,7 @@ export function Options({
   const elementLen = children.length;
 
   if (elementLen <= 0) {
+    console.log('loading', loading);
     return (
       <Spin spinning={Boolean(loading)}>
         <Empty />

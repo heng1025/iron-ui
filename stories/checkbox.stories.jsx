@@ -4,13 +4,6 @@ import Checkbox from '../components/checkbox';
 
 export default {
   title: 'components/Checkbox',
-  decorators: [
-    (Story) => (
-      <div style={{ width: 300 }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const Primary = (args) => {

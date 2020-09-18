@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from 'antd/es/icon';
 import VirtualSelect from '../components/select';
 
@@ -11,14 +11,6 @@ for (let i = 0; i < 10000; i++) {
 
 export default {
   title: 'Components/VirtualSelect',
-  component: VirtualSelect,
-  decorators: [
-    (Story) => (
-      <div style={{ width: 300 }}>
-        <Story />
-      </div>
-    ),
-  ],
   parameters: {
     actions: {
       handles: ['click .iron-select-option-item'],
@@ -55,5 +47,24 @@ Search.parameters = {
 export const Disabled = Primary.bind();
 Disabled.args = { disabled: true, value: 'iron' };
 
-export const Clear = Primary.bind();
-Clear.args = { allowClear: true };
+export const AllowClear = Primary.bind();
+AllowClear.args = { allowClear: true };
+
+export const Loading = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setData(options);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [options]);
+
+  return (
+    <VirtualSelect loading>
+      {data.map((v) => (
+        <div key={v}>{v}</div>
+      ))}
+    </VirtualSelect>
+  );
+};

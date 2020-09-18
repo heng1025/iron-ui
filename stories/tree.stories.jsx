@@ -23,14 +23,14 @@ const treeData = dig();
 
 export default {
   title: 'Components/VirtualTree',
-  component: VirtualTree,
-  decorators: [
-    (Story) => (
-      <div style={{ width: 300, height: 300 }}>
-        <Story />
-      </div>
-    ),
-  ],
+  // component: VirtualTree,
+  // decorators: [
+  //   (Story) => (
+  //     <div style={{ width: 300, height: 300 }}>
+  //       <Story />
+  //     </div>
+  //   ),
+  // ],
 };
 
 export const Primary = (args) => <VirtualTree {...args} treeData={treeData} />;
