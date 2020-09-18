@@ -36,7 +36,6 @@ export function Options({
   const elementLen = children.length;
 
   if (elementLen <= 0) {
-    console.log('loading', loading);
     return (
       <Spin spinning={Boolean(loading)}>
         <Empty />

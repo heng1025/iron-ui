@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Icon from 'antd/es/icon';
+import Icon from '../components/icon';
 import VirtualSelect from '../components/select';
 
 const options = [];

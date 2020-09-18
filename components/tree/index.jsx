@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'antd/es/icon';
+import Icon from '../icon';
 import Checkbox from '../checkbox';
 
 import { VListWithDynamic, Title } from './utils';

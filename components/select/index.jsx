@@ -8,7 +8,7 @@ import React, {
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import classNames from 'classnames';
-import Icon from 'antd/es/icon';
+import Icon from '../icon';
 import Input from '../input';
 import { Options } from './common';
 

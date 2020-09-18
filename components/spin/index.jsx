@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'antd/es/icon';
+import Icon from '../icon';
 
 const Spin = ({ children, spinning, tip }) => {
   return (
