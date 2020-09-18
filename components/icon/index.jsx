@@ -1,24 +1,8 @@
 import React from 'react';
-import {
-  LoadingOutline,
-  UpOutline,
-  DownOutline,
-  SearchOutline,
-  CaretDownFill,
-  CheckOutline,
-} from '@ant-design/icons';
-
-const icons = [
-  LoadingOutline,
-  UpOutline,
-  DownOutline,
-  SearchOutline,
-  CaretDownFill,
-  CheckOutline,
-];
+import * as Icons from '../../utils/antdIcon';
 
 const Icon = ({ type, rotate, className }) => {
-  const { icon } = icons.find((i) => i.name === type);
+  const { icon } = Object.values(Icons).find((i) => i.name === type);
   return (
     <i aria-label={`icon: ${type}`} className={className}>
       <icon.tag
