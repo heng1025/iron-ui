@@ -4,5 +4,5 @@ export {
   DownOutline,
   SearchOutline,
   CaretDownFill,
-  CheckOutline
+  CheckOutline,
 } from '@ant-design/icons';

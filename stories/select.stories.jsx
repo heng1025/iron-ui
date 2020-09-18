@@ -57,7 +57,7 @@ export const Loading = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setData(options);
-    }, 5000);
+    }, 5000000);
     return () => clearTimeout(timer);
   }, [options]);
 

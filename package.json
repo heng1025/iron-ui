@@ -30,7 +30,7 @@
     "dist": "gulp compile-with-dist",
     "compile": "gulp build",
     "test": "jest --watch",
-    "storybook": "start-storybook --ci -p 6008 --debug-webpack",
+    "storybook": "start-storybook --ci -p 6008",
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
