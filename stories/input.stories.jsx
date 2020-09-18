@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'antd/es/icon';
+import Icon from '../components/icon';
 import Input from '../components/input';
 
 export default {

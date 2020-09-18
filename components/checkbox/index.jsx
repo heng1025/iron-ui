@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import Icon from 'antd/es/icon';
+import Icon from '../icon';
 
 const Checkbox = forwardRef((props, ref) => {
   const {
