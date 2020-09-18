@@ -3,7 +3,7 @@ import Empty from '../components/empty';
 
 export default {
   title: 'components/Empty',
-  // component: Empty,
+  component: Empty,
 };
 
 export const Primary = (args) => {
