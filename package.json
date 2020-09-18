@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^2.1.1",
-    "antd": "^3.26",
     "classnames": "^2.2.6",
     "lodash": "^4.17.20",
     "prop-types": "^15.7.2",
