@@ -5,7 +5,6 @@ import Icon from 'antd/es/icon';
 const Checkbox = forwardRef((props, ref) => {
   const { children, checked, indeterminate, onChange, ...rest } = props;
   const [isChecked, setChecked] = useState(false);
-  const [val, setVal] = useState('');
 
   useEffect(() => {
     setChecked(checked);
@@ -39,9 +38,7 @@ const Checkbox = forwardRef((props, ref) => {
           children ? 'iron-checkbox-has-children' : ''
         )}
         checked={isChecked}
-        value={val}
         onChange={(e) => {
-          setVal(e.target.value);
           if (onChange) {
             onChange(e);
           }
@@ -50,7 +47,8 @@ const Checkbox = forwardRef((props, ref) => {
       <span
         className={classNames(
           'iron-checkbox-square',
-          isChecked ? 'iron-checkbox-checked' : ''
+          isChecked ? 'iron-checkbox-checked' : '',
+          !children ? 'iron-checkbox-no-children' : ''
         )}
       >
         {getCheckIcon()}

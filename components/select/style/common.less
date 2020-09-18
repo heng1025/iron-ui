@@ -1,22 +1,26 @@
+@import '../../style/theme/default.less';
+
+@select-prefix-cls: ~'@{iron-prefix}-select';
+
 .ReactVirtualized__Grid {
   &:focus {
     outline: none;
   }
 }
 
-.iron-select-container {
+.@{select-prefix-cls}-container {
   position: relative;
-  .iron-select-input {
+  .@{select-prefix-cls}-input {
     input {
       cursor: pointer;
     }
-    &.iron-select-default {
+    &.@{select-prefix-cls}-default {
       input {
         cursor: default;
       }
     }
   }
-  .ant-input-suffix {
+  .@{iron-prefix}-input-suffix {
     color: rgba(0, 0, 0, 0.25);
     font-size: 12px;
     .icon-close {
@@ -25,7 +29,7 @@
   }
 }
 
-.iron-select-options {
+.@{select-prefix-cls}-options {
   position: absolute;
   top: 38px;
   left: 0;
@@ -39,7 +43,7 @@
   &.empty {
     text-align: center;
   }
-  .iron-select-option-item {
+  .@{select-prefix-cls}-option-item {
     padding: 0 6px;
     overflow: hidden;
     line-height: 30px;

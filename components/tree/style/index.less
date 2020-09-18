@@ -1,13 +1,21 @@
+@import '../../style/theme/default.less';
+
+@tree-prefix-cls: ~'@{iron-prefix}-tree';
+
 .ReactVirtualized__Grid {
   &:focus {
     outline: none;
   }
 }
 
-.iron-tree {
+.@{tree-prefix-cls} {
   width: 100%;
   text-align: left;
-  .iron-tree-switch {
+  &-child {
+    display: inline-flex;
+    align-items: center;
+  }
+  &-switch {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -20,11 +28,16 @@
       font-size: 12px;
     }
   }
-  .iron-tree-title {
+  .@{iron-prefix}-checkbox-wrapper {
+    margin-right: 4px;
+  }
+  &-title {
     display: inline-block;
-    margin-left: 4px;
-    padding: 0 5px;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 3px;
     border-radius: 2px;
+
     cursor: pointer;
     &:hover {
       background-color: #ccddec;

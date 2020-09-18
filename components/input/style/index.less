@@ -1,13 +1,17 @@
-.iron-input-wrapper {
+@import '../../style/theme/default.less';
+
+@input-prefix-cls: ~'@{iron-prefix}-input';
+
+.@{input-prefix-cls}-wrapper {
   position: relative;
-  .iron-input {
+  .@{input-prefix-cls} {
     width: 100%;
     font-size: 14px;
     color: #000000a6;
     box-sizing: border-box;
     padding: 6px 8px;
     border: 1px solid #d9d9d9;
-    &.iron-input-icon {
+    &.@{input-prefix-cls}-icon {
       padding-right: 20px;
     }
 
@@ -38,7 +42,7 @@
       box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
     }
   }
-  .iron-input-suffix {
+  .@{input-prefix-cls}-suffix {
     position: absolute;
     right: 8px;
     top: 8px;

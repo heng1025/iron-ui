@@ -200,13 +200,16 @@ const TreeNode = ({ checkable, node, children, onExpand, onCheck }) => {
   }
 
   return (
-    <div style={{ height: ROW_HEIGHT, lineHeight: `${ROW_HEIGHT}px` }}>
+    <div
+      style={{ height: ROW_HEIGHT, lineHeight: `${ROW_HEIGHT}px` }}
+      className="iron-tree-child"
+    >
       <span
         onClick={handleExpand}
         aria-hidden="true"
         className="iron-tree-switch"
         style={{
-          opacity: node.children ? 1 : 0,
+          visibility: node.children ? 'visible' : 'hidden',
         }}
       >
         <Icon
