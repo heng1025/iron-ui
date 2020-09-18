@@ -7,10 +7,24 @@ module.exports = {
   webpackFinal: async (config, options) => {
     // console.log('config', config);
     // change webpack config
-    config.module.rules.push({
-      test: /\.less$/,
-      loaders: ['style-loader', 'css-loader', 'less-loader'],
-    });
+    config.module.rules.push(
+      {
+        test: /\.less$/,
+        loaders: ['style-loader', 'css-loader', 'less-loader'],
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          minetype: 'image/svg+xml',
+        },
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)(\?v=\d+\.\d+\.\d+)?$/i,
+        loader: 'url-loader',
+      }
+    );
 
     return config;
   },

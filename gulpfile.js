@@ -1,4 +1,3 @@
-const fs = require('fs');
 const gulp = require('gulp');
 const webpack = require('webpack');
 const rimraf = require('rimraf');
@@ -86,7 +85,7 @@ function babelify(modules, dir) {
     '!components/**/__tests__/**',
   ];
 
-  let stream = gulp.src(source).pipe(babel(babelConfig));
+  const stream = gulp.src(source).pipe(babel(babelConfig));
 
   return stream.pipe(gulp.dest(dir));
 }
@@ -96,8 +95,10 @@ function compile(modules) {
   rimraf.sync(destDir);
   const less = compileLess(destDir);
   const jsFilesStream = babelify(modules, destDir);
-
-  return merge2([less, jsFilesStream]);
+  const assets = gulp
+    .src(['components/**/*.@(png|svg)'])
+    .pipe(gulp.dest(modules === false ? esDir : libDir));
+  return merge2([less, jsFilesStream, assets]);
 }
 
 gulp.task('compile-with-es', (done) => {

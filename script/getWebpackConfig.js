@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // build dist
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
@@ -8,6 +9,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const getBabelCommonConfig = require('./getBabelCommonConfig');
 const { getProjectPath } = require('./utils');
 
+// eslint-disable-next-line import/no-dynamic-require
 const pkg = require(getProjectPath('package.json'));
 
 function getWebpackConfig() {
@@ -71,6 +73,22 @@ function getWebpackConfig() {
             'css-loader',
             'less-loader',
           ],
+        },
+        // Images
+        {
+          test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            minetype: 'image/svg+xml',
+          },
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif)(\?v=\d+\.\d+\.\d+)?$/i,
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+          },
         },
       ],
     },

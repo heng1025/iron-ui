@@ -1,4 +1,5 @@
 // jest config (jest --no-cache when debugger)
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { createTransformer } = require('babel-jest');
 const getBabelCommonConfig = require('./getBabelCommonConfig');
 
