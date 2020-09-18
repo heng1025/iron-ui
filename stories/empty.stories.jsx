@@ -3,13 +3,7 @@ import Empty from '../components/empty';
 
 export default {
   title: 'components/Empty',
-  decorators: [
-    (Story) => (
-      <div style={{ width: 300 }}>
-        <Story />
-      </div>
-    ),
-  ],
+  // component: Empty,
 };
 
 export const Primary = (args) => {

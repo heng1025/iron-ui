@@ -4,6 +4,7 @@ import Input from '../components/input';
 
 export default {
   title: 'components/Input',
+  component: Input,
 };
 
 export const Primary = (args) => {

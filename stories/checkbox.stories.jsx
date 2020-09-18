@@ -1,9 +1,9 @@
 import React from 'react';
-// import Icon from 'antd/es/icon';
 import Checkbox from '../components/checkbox';
 
 export default {
-  title: 'components/Checkbox',
+  title: 'Components/Checkbox',
+  component: Checkbox,
 };
 
 export const Primary = (args) => {

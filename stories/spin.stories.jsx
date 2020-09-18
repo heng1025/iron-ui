@@ -3,6 +3,7 @@ import Spin from '../components/spin';
 
 export default {
   title: 'components/Spin',
+  component: Spin,
 };
 
 export const Primay = (args) => {

@@ -1,7 +1,6 @@
 import React from 'react';
-import emptyImg from './style/empty.svg';
 
-const Empty = ({ children, image = emptyImg, description = 'No Data' }) => {
+const Empty = ({ children, image="./style/empty.svg", description = 'No Data' }) => {
   return (
     <div className="iron-empty">
       {image && (
