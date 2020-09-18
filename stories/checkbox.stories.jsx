@@ -14,15 +14,21 @@ export default {
 };
 
 export const Primary = (args) => {
-  return <Checkbox {...args}>123</Checkbox>;
+  return (
+    <Checkbox
+      {...args}
+      onChange={(e) => {
+        console.log('checked', e.target.checked);
+      }}
+    >
+      123
+    </Checkbox>
+  );
 };
 
 export const Indeterminate = Primary.bind();
 Indeterminate.args = {
   indeterminate: true,
-  onChange: (e) => {
-    console.log('checked', e.target.checked);
-  },
 };
 
 export const NoChildren = () => {
@@ -34,5 +40,8 @@ export const NoChildren = () => {
   );
 };
 
-// export const Disabled = Primary.bind();
-// Disabled.args = { disabled: true };
+export const Checked = Primary.bind();
+Checked.args = { checked: true };
+
+export const Disabled = Primary.bind();
+Disabled.args = { disabled: true, checked: true };

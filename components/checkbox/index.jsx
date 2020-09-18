@@ -3,7 +3,15 @@ import classNames from 'classnames';
 import Icon from 'antd/es/icon';
 
 const Checkbox = forwardRef((props, ref) => {
-  const { children, checked, indeterminate, onChange, ...rest } = props;
+  const {
+    children,
+    disabled,
+    checked,
+    defaultChecked,
+    indeterminate,
+    onChange,
+    ...rest
+  } = props;
   const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -21,40 +29,53 @@ const Checkbox = forwardRef((props, ref) => {
   }
 
   return (
-    <div
-      aria-hidden="true"
-      className="iron-checkbox-wrapper"
-      onClick={(e) => {
-        e.stopPropagation();
-        setChecked(!isChecked);
-      }}
+    <label
+      htmlFor="iron-checkbox"
+      className={classNames(
+        'iron-checkbox-wrapper',
+        disabled ? 'iron-checkbox-wrapper-disabled' : ''
+      )}
     >
-      <input
-        {...rest}
-        type="checkbox"
-        ref={ref}
-        className={classNames(
-          'iron-checkbox-input',
-          children ? 'iron-checkbox-has-children' : ''
-        )}
-        checked={isChecked}
-        onChange={(e) => {
-          if (onChange) {
-            onChange(e);
-          }
-        }}
-      />
       <span
         className={classNames(
-          'iron-checkbox-square',
-          isChecked ? 'iron-checkbox-checked' : '',
-          !children ? 'iron-checkbox-no-children' : ''
+          'iron-checkbox',
+          !children ? 'iron-checkbox-no-children' : '',
+          disabled ? 'iron-checkbox-disabled' : ''
         )}
       >
-        {getCheckIcon()}
+        <input
+          ref={ref}
+          type="checkbox"
+          id="iron-checkbox"
+          {...rest}
+          className={classNames(
+            'iron-checkbox-input',
+            disabled ? 'iron-checkbox-input-disabled' : ''
+          )}
+          disabled={disabled}
+          defaultChecked={defaultChecked}
+          // expect boolean
+          checked={!!isChecked}
+          onChange={(e) => {
+            setChecked(e.target.checked);
+            if (onChange) {
+              onChange(e);
+            }
+          }}
+        />
+        <span
+          className={classNames(
+            'iron-checkbox-square',
+            isChecked ? 'iron-checkbox-checked' : '',
+            disabled ? 'iron-checkbox-disabled' : '',
+          )}
+        >
+          {getCheckIcon()}
+        </span>
       </span>
+
       {children && <span className="iron-checkbox-label">{children}</span>}
-    </div>
+    </label>
   );
 });
 
