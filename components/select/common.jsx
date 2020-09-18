@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import Empty from 'antd/es/empty';
 import Spin from 'antd/es/spin';
 import VList from 'react-virtualized/dist/es/List';
 import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
+import Empty from '../empty';
 
 function VRow({ children: child, style, selected, className, onClick }) {
   const {
@@ -38,7 +38,7 @@ export function Options({
   if (elementLen <= 0) {
     return (
       <Spin spinning={Boolean(loading)}>
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        <Empty />
       </Spin>
     );
   }
