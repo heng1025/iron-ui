@@ -37,15 +37,15 @@ function compileDist(done) {
 
     const buildInfo = stats.toString({
       colors: true,
-      children: true,
+      children: false,
       chunks: false,
       modules: false,
       chunkModules: false,
       hash: false,
       version: false,
     });
+    // show build info in terminal
     console.log(buildInfo);
-
     done(0);
   });
 }

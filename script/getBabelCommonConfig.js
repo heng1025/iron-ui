@@ -1,4 +1,4 @@
-module.exports = function babel(modules) {
+module.exports = (modules) => {
   const plugins = ['@babel/plugin-transform-runtime'];
   const presets = [
     [
