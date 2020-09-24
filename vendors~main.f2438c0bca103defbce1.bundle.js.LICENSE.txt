@@ -25,6 +25,10 @@
  * Released under the MIT License.
  */
 
+//! moment.js
+
+//! moment.js locale configuration
+
 //! stable.js 0.1.8, https://github.com/Two-Screen/stable
 
 //! © 2018 Angry Bytes and contributors. MIT licensed.
