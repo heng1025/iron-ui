@@ -7,7 +7,14 @@ module.exports = {
     jest: true,
     es6: true,
   },
-  plugins: ['react', 'react-hooks'],
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: ['react', 'react-hooks', 'babel'],
   rules: {
     'react/jsx-one-expression-per-line': 0,
     'react/prop-types': 0,
