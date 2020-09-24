@@ -117,31 +117,38 @@ export function useFilterPicker({
   };
 }
 
-export function useColumnFilter({ request, pageSize, options = {} }) {
+export function useColumnFilter({
+  requestColumnData,
+  requestTableData,
+  pageSize,
+  options = {},
+}) {
   // { column: '', value: '', condition: '7' }
   const [conditions, setConditions] = useState([]);
   // search params
   const [searchConditions, setSearchConditioons] = useState([]);
-  const [curTableColumn, setCurTableColumn] = useState('');
+  const [curColumn, setCurColumn] = useState('');
   const [curSortColumn, setCurSortColumn] = useState('');
   const [curSort, setCurSort] = useState('');
+  const [dataSource, setDataSource] = useState([]);
 
   function clearFilter() {
     setConditions([]);
-    setCurTableColumn('');
+    setCurColumn('');
     setCurSortColumn('');
     setCurSort('');
   }
 
-  function fetchTableList(params = {}) {
+  async function fetchTableList(params = {}) {
     const { clearSelectedKeys } = options;
     if (clearSelectedKeys) {
       clearSelectedKeys();
     }
-    request(curTableColumn, params);
+    const result = await requestTableData({ column: curColumn, ...params });
+    setDataSource(result);
   }
 
-  function fetchSearchTableList(updatedConditions = []) {
+  async function fetchSearchTableList(updatedConditions = []) {
     // clear filter params
     clearFilter();
     setSearchConditioons(updatedConditions);
@@ -154,7 +161,7 @@ export function useColumnFilter({ request, pageSize, options = {} }) {
 
   // filter methods
   async function handleCommit(
-    tableColumn,
+    column,
     updatedConditions = [],
     shouldClearSearchParams = false
   ) {
@@ -162,29 +169,27 @@ export function useColumnFilter({ request, pageSize, options = {} }) {
     if (shouldClearSearchParams) {
       setSearchConditioons([]);
     }
-    setCurTableColumn(tableColumn);
+    setCurColumn(column);
     setConditions(updatedConditions);
     fetchTableList({
       page: 1, // go back first page
       pageSize,
-      currentColumn: tableColumn,
       conditions: updatedConditions,
       searchConditions: shouldClearSearchParams ? [] : searchConditions,
-      sort: curSortColumn === tableColumn ? curSort : '',
+      sort: curSortColumn === column ? curSort : '',
     });
   }
 
-  async function handleSort(tableColumn, sort) {
-    setCurTableColumn(tableColumn);
-    setCurSortColumn(tableColumn);
+  async function handleSort(column, sort) {
+    setCurColumn(column);
+    setCurSortColumn(column);
     setCurSort(sort);
-    fetchTableList({
+    return fetchTableList({
       sort,
       page: 1,
       pageSize,
       conditions,
       searchConditions,
-      currentColumn: tableColumn,
     });
   }
 
@@ -194,22 +199,22 @@ export function useColumnFilter({ request, pageSize, options = {} }) {
       pageSize: ps,
       conditions,
       searchConditions,
-      currentColumn: curTableColumn,
-      sort: curSortColumn === curTableColumn ? curSort : '',
+      sort: curSortColumn === curColumn ? curSort : '',
     });
   }
 
   return {
     conditions,
+    dataSource,
     clearFilter,
     fetchTableList,
     fetchSearchTableList,
     handlePageChange,
     handleFilterCommit: handleCommit,
-    getTitleProps: (column = curTableColumn) => ({
-      request,
-      curColumn: column,
+    getTitleProps: (column = curColumn) => ({
       conditions,
+      requestColumnData,
+      curColumn: column,
       searchConditions,
       sort: curSortColumn === column ? curSort : '',
       onCommit: handleCommit,

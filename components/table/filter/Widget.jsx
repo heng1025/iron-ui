@@ -30,13 +30,13 @@ function FilterSearch({ value, onChange }) {
 function CheckAll({ indeterminate, checked, count, className, onChange }) {
   return (
     <Checkbox
-      className={classNames('checkbox-item', className)}
+      className={className}
       indeterminate={indeterminate}
       checked={checked}
       onChange={onChange}
     >
-      <em className="text">Select All</em>
-      <em className="count">({count})</em>
+      <span className="text">Select All</span>
+      <span className="count">({count})</span>
     </Checkbox>
   );
 }
@@ -79,7 +79,7 @@ export function FilterHeader({
         <span
           aria-hidden="true"
           onClick={onAdvance}
-          className={classNames('icon-txt', {
+          className={classNames('iron-table-filter-icon-txt', {
             active: isAdvanceAction,
             disabled: loading,
           })}
@@ -90,7 +90,7 @@ export function FilterHeader({
         <span
           aria-hidden="true"
           onClick={onClear}
-          className={classNames('iron-table-filter-icon', {
+          className={classNames('iron-table-filter-icon-txt', {
             disabled: disabled,
           })}
         >
@@ -181,13 +181,14 @@ function FilterTree({ loading, filterList, ...rest }) {
               checked={isCheckAll}
               indeterminate={indeterminate}
               onChange={handleCheckAll}
-              count={filterList.reduce((acc, { count }) => acc + count, 0)}
+              count={filterList.reduce(
+                (acc, { count }) => acc + Number(count),
+                0
+              )}
             />
             <div className="tree-wrap">
               <Tree
                 checkable
-                defaultExpandAll={false}
-                rowClassName="tree-item"
                 checkedKeys={selectFilterValues(checkedValues)}
                 onCheck={handleCheckNode}
                 treeData={transformDate(filterList)}
@@ -195,7 +196,7 @@ function FilterTree({ loading, filterList, ...rest }) {
             </div>
           </div>
         ) : (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          <Empty />
         )}
       </Spin>
     </div>

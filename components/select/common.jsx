@@ -6,7 +6,6 @@ import Spin from '../spin';
 import Empty from '../empty';
 
 function VRow({ children: child, style, selected, className, onClick }) {
-  console.log('VRow -> className', className);
   const {
     value: val = child.key,
     children: text,
@@ -34,7 +33,6 @@ export function Options({
   rowHeight = 30,
   ...rest
 }) {
-  console.log('rest', rest);
   const elementLen = children.length;
 
   if (elementLen <= 0) {

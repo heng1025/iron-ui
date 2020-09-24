@@ -41,6 +41,7 @@ function CalenderAndSelect({ value, onChange }) {
         allowClear={false}
         className="date-picker"
         getCalendarContainer={triggerNode => triggerNode.parentNode}
+        style={{ visibility: 'hidden' }}
         onOpenChange={status => setDateOpen(status)}
         onChange={onChange}
       />

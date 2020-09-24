@@ -10,6 +10,7 @@ const Checkbox = forwardRef((props, ref) => {
     defaultChecked,
     indeterminate,
     onChange,
+    className,
     ...rest
   } = props;
   const [isChecked, setChecked] = useState(false);
@@ -32,6 +33,7 @@ const Checkbox = forwardRef((props, ref) => {
     <label
       htmlFor="iron-checkbox"
       className={classNames(
+        className,
         'iron-checkbox-wrapper',
         disabled ? 'iron-checkbox-wrapper-disabled' : ''
       )}

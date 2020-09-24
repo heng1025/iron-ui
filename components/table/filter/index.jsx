@@ -10,7 +10,6 @@ import Button from '../../button';
 export { useColumnFilter } from './hooks';
 
 export function FilterTitle({
-  request,
   loading,
   children,
   columnType = 'text', // text, number, date, dateTime
@@ -19,6 +18,7 @@ export function FilterTitle({
   onCommit,
   curColumn,
   conditions,
+  requestColumnData,
   searchConditions,
 }) {
   const [isFiltered, setFiltered] = useState(false);
@@ -79,12 +79,11 @@ export function FilterTitle({
   async function handleVisibleChange(v) {
     setVisible(v);
     if (v) {
-      const filters = await request(curColumn, {
+      const filters = await requestColumnData({
+        column: curColumn,
         searchConditions,
         conditions: conditions.filter(item => item.column !== curColumn),
-        tableColumn: curColumn,
       });
-      console.log('handleVisibleChange -> filters', filters);
       setFilterItems(filters || []);
     }
   }

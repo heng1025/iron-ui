@@ -4,47 +4,10 @@
 
 @filterCount: #bebebe;
 
-.ellispis {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  word-break: break-all;
-}
-
-.filter-base-item {
-  em {
-    font-style: normal;
-    &.text {
-      flex: 0 1 auto;
-      .ellispis();
-    }
-    &.count {
-      flex: 0 0 auto;
-      color: @filterCount;
-    }
-  }
-}
-
-.filter-checkbox-item {
-  .filter-base-item();
-  em.text {
-    margin: 0 6px;
-  }
-}
-
 .@{table-filter-prefix-cls} {
   &-content {
     padding: 20px 22px 10px;
     border: 1px solid #bdd1e2;
-  }
-  &-filter-icon {
-    margin-right: 4px;
-    color: rgba(17, 65, 108, 0.6);
-    font-size: 16px;
-    cursor: pointer;
-    &.active {
-      color: #ea6473;
-    }
   }
   &-btns {
     width: 100%;
@@ -67,6 +30,17 @@
     cursor: pointer;
     &.active {
       color: #09f1e6;
+    }
+  }
+  &-icon-txt {
+    margin-right: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    &.active {
+      color: #ea6473;
+    }
+    > span {
+      font-size: 12px;
     }
   }
   &-title {
@@ -109,65 +83,24 @@
       .check-all {
         padding-left: 20px;
       }
-      :global {
-        :focus {
-          outline: none;
-        }
-        .ant-checkbox-group {
-          width: 100%;
-        }
-        .checkbox-item {
-          display: inline-flex;
-          align-items: center;
-          width: 100%;
-          margin-left: 0;
-          span:last-child {
-            display: flex;
-            padding: 0;
-            overflow: hidden;
-            .filter-checkbox-item();
-          }
-        }
 
-        .tree-wrap {
-          height: 160px;
-          overflow: auto;
-          .ant-tree-title {
-            .filter-checkbox-item();
-          }
-
-          .ant-tree-switcher {
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            vertical-align: -2px;
-          }
-
-          .tree-item {
-            .tree-title {
-              display: inline-flex !important;
-              max-width: 180px;
-              .filter-checkbox-item();
-              em.text {
-                margin-left: 0;
-              }
-            }
-          }
-        }
+      .tree-wrap {
+        height: 160px;
+        overflow: auto;
       }
     }
   }
   &-cal-wrap {
     position: relative;
+    .date-picker {
+      width: 100%;
+      height: 28px;
+    }
     .cal-icon {
       position: absolute;
       top: 4px;
       right: 5px;
       font-size: 20px;
-    }
-    .date-picker {
-      width: 100%;
-      height: 28px;
     }
   }
 }

@@ -9,6 +9,6 @@ export {
   SortAscendingOutline,
   SortDescendingOutline,
   FilterFill,
-  CalculatorOutline,
   DeleteFill,
+  CalendarOutline,
 } from '@ant-design/icons';
