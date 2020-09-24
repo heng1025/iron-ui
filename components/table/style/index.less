@@ -1,0 +1,43 @@
+@import '../../style/theme/default.less';
+
+@table-prefix-cls: ~'@{iron-prefix}-table';
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.@{table-prefix-cls} {
+  width: 100%;
+  font-size: 14px;
+  overflow: hidden;
+  &-row {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    > li {
+      padding: 12px;
+      box-sizing: border-box;
+    }
+  }
+  &-header {
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 600;
+    background-color: #fafafa;
+    > li {
+      background-color: #fafafa;
+    }
+  }
+  &-content {
+    background-color: #fff;
+    .@{table-prefix-cls} {
+      &-row {
+        &:hover {
+          background-color: #fafafa;
+        }
+      }
+    }
+  }
+}
