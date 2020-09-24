@@ -12,6 +12,8 @@ import Icon from '../icon';
 import Input from '../input';
 import { Options } from './common';
 
+export { Options };
+
 const VirtualSelect = forwardRef((props, ref) => {
   const {
     value,

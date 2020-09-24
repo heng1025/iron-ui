@@ -1,25 +1,28 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Row, Col, Input, Checkbox, Empty, Spin } from 'antd';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import 'antd/es/row/style/css';
+import 'antd/es/col/style/css';
+import { transformDate, formatValue, transformWord } from './common';
 import Icon from '../../icon';
 import Tree from '../../tree';
-import { Options as VirtualOptions } from '../../select/common';
-import { transformDate, formatValue, transformWord } from './common';
+import Input from '../../input';
+import Empty from '../../empty';
+import Spin from '../../spin';
+import Checkbox from '../../checkbox';
+import { Options as VirtualOptions } from '../../select';
 import { useFilterPicker } from './hooks';
-
-import styles from './index.less';
-
-const { Search } = Input;
 
 const selectFilterValues = arr => arr.map(v => String(v.value));
 
 function FilterSearch({ value, onChange }) {
   return (
-    <Search
+    <Input
       placeholder="Input search keyword"
       value={value}
       onChange={onChange}
-      className={styles.search}
+      className="iron-table-filter-search"
     />
   );
 }
@@ -50,47 +53,48 @@ export function FilterHeader({
 }) {
   return (
     <Row
-      className={styles.title}
+      className="iron-table-filter-title"
       type="flex"
       justify="space-between"
       align="middle"
     >
       <Col>
         <Icon
-          type="iconsort-asc"
+          type="sort-ascending"
           onClick={() => onSort('1')}
           style={{ marginRight: 8 }}
-          className={classNames(styles.icon, { [styles.active]: sort === '1' })}
+          className={classNames('iron-table-filter-icon', {
+            active: sort === '1',
+          })}
         />
         <Icon
-          type="iconsort-desc"
+          type="sort-descending"
           onClick={() => onSort('0')}
-          className={classNames(styles.icon, { [styles.active]: sort === '0' })}
+          className={classNames('iron-table-filter-icon', {
+            active: sort === '0',
+          })}
         />
       </Col>
       <Col>
         <span
           aria-hidden="true"
           onClick={onAdvance}
-          className={classNames(styles['icon-txt'], {
-            [styles.active]: isAdvanceAction,
-            [styles.disabled]: loading,
+          className={classNames('icon-txt', {
+            active: isAdvanceAction,
+            disabled: loading,
           })}
         >
-          <Icon type="iconfilter1" className={styles.icon} />
-          <span className={styles.text} role="button">
-            {`${transformWord(columnType)} Filter`}
-          </span>
+          <Icon type="filter" className="iron-table-filter-icon" />
+          <span role="button">{`${transformWord(columnType)} Filter`}</span>
         </span>
         <span
           aria-hidden="true"
           onClick={onClear}
-          className={classNames(styles['icon-txt'], {
-            [styles.disabled]: disabled,
+          className={classNames('iron-table-filter-icon', {
+            disabled: disabled,
           })}
         >
-          <Icon type="icondelete" className={styles.icon} />
-          <span className={styles.text}>Clear</span>
+          <Icon type="delete" className="iron-table-filter-icon" />
         </span>
       </Col>
     </Row>
@@ -110,43 +114,41 @@ function FilterCheckbox({ loading, columnType, filterList, ...rest }) {
   } = useFilterPicker({ filterList, ...rest });
 
   return (
-    <div className={styles.checkbox}>
+    <div className="iron-table-filter-checkbox">
       <FilterSearch value={searchVal} onChange={handleSeach} />
-      <div className={styles.des}>Description</div>
+      <div className="des">Description</div>
       <Spin spinning={loading}>
         {filterList.length > 0 ? (
-          <div className={styles['check-content']}>
+          <div className="check-content">
             <CheckAll
               checked={isCheckAll}
               indeterminate={indeterminate}
               onChange={handleCheckAll}
-              count={filterList.reduce((acc, { count }) => acc + count, 0)}
+              count={filterList.reduce(
+                (acc, { count }) => acc + Number(count),
+                0
+              )}
             />
-            {/*
-             onChange event can't add  to Checkbox.Group,
-             because checked value may lost
-            */}
-            <Checkbox.Group value={checkedValues.map(({ value: v }) => v)}>
-              <VirtualOptions height={160} rowHeight={20}>
-                {filterList.map(item => {
-                  const { value, count } = item;
-                  const strVal = String(value);
-                  return (
+            <VirtualOptions height={160} rowHeight={20}>
+              {filterList.map(item => {
+                const { value, count } = item;
+                const strVal = String(value);
+                return (
+                  <div>
                     <Checkbox
                       key={strVal}
                       value={value}
-                      className="checkbox-item"
                       onChange={handleCheckItem}
                     >
-                      <em title={strVal} className="text">
+                      <span title={strVal}>
                         {formatValue(columnType, value)}
-                      </em>
-                      <em className="count">({count})</em>
+                      </span>
+                      <span className="count">({count})</span>
                     </Checkbox>
-                  );
-                })}
-              </VirtualOptions>
-            </Checkbox.Group>
+                  </div>
+                );
+              })}
+            </VirtualOptions>
           </div>
         ) : (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -168,14 +170,14 @@ function FilterTree({ loading, filterList, ...rest }) {
   } = useFilterPicker({ filterList, ...rest });
 
   return (
-    <div className={styles.checkbox}>
+    <div className="iron-table-filter-checkbox">
       <FilterSearch value={searchVal} onChange={handleSeach} />
-      <div className={styles.des}>Description</div>
+      <div className="des">Description</div>
       <Spin spinning={loading}>
         {filterList.length > 0 ? (
-          <div className={styles['check-content']}>
+          <div className="check-content">
             <CheckAll
-              className={styles['check-all']}
+              className="check-all"
               checked={isCheckAll}
               indeterminate={indeterminate}
               onChange={handleCheckAll}

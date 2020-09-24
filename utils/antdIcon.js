@@ -6,4 +6,9 @@ export {
   CaretDownFill,
   CheckOutline,
   CloseCircleFill,
+  SortAscendingOutline,
+  SortDescendingOutline,
+  FilterFill,
+  CalculatorOutline,
+  DeleteFill,
 } from '@ant-design/icons';

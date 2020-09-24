@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Popover, Button } from 'antd';
+import Popover from 'antd/es/popover';
+import 'antd/es/popover/style/css';
 import classNames from 'classnames';
+import Advance from './Advance';
+import { FilterHeader, FilterPicker } from './Widget';
 import Icon from '../../icon';
-import AdvanceFilter from './AdvanceFilter';
-import { FilterHeader, FilterPicker } from './FilterContent';
-import styles from './index.less';
+import Button from '../../button';
 
-export { useColumnFilter, withFilterList, actionType } from './hooks';
+export { useColumnFilter } from './hooks';
 
-function ColumnFilter({
-  dispatch,
+export function FilterTitle({
+  request,
   loading,
   children,
   columnType = 'text', // text, number, date, dateTime
@@ -19,7 +20,6 @@ function ColumnFilter({
   curColumn,
   conditions,
   searchConditions,
-  tableName = 'SLOP_BIZ.V_ALERT_CENTER',
 }) {
   const [isFiltered, setFiltered] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -79,15 +79,12 @@ function ColumnFilter({
   async function handleVisibleChange(v) {
     setVisible(v);
     if (v) {
-      const filters = await dispatch({
-        type: 'global/fetchTableFilterItems',
-        payload: {
-          tableName,
-          searchConditions,
-          conditions: conditions.filter(item => item.column !== curColumn),
-          tableColumn: curColumn,
-        },
+      const filters = await request(curColumn, {
+        searchConditions,
+        conditions: conditions.filter(item => item.column !== curColumn),
+        tableColumn: curColumn,
       });
+      console.log('handleVisibleChange -> filters', filters);
       setFilterItems(filters || []);
     }
   }
@@ -153,7 +150,7 @@ function ColumnFilter({
 
   return (
     <>
-      <AdvanceFilter
+      <Advance
         loading={loading}
         columnType={columnType}
         filterList={filterItems}
@@ -167,7 +164,6 @@ function ColumnFilter({
         trigger="click"
         visible={visible}
         onVisibleChange={handleVisibleChange}
-        overlayClassName={styles.container}
         overlayStyle={{ width: 280 }}
         content={
           <>
@@ -183,7 +179,7 @@ function ColumnFilter({
               isAdvanceAction={isAdvanceAction}
               onAdvance={showAdvanceFilter}
             />
-            <div className={styles.content}>
+            <div className="iron-table-filter">
               <FilterPicker
                 loading={loading}
                 filterList={filterItems}
@@ -192,7 +188,7 @@ function ColumnFilter({
                 conditions={conditions}
                 onCheckedList={handleCheckList}
               />
-              <div className={styles['bottom-btns']}>
+              <div className="iron-table-filter-btns">
                 <Button onClick={() => setVisible(false)}>Cancel</Button>
                 <Button
                   type="primary"
@@ -208,9 +204,9 @@ function ColumnFilter({
       >
         <div>
           <Icon
-            type="iconfilter1"
-            className={classNames(styles['filter-icon'], {
-              [styles.active]: isFiltered,
+            type="filter"
+            className={classNames('filter-icon', {
+              active: isFiltered,
             })}
           />
           <span>{children}</span>
@@ -219,5 +215,3 @@ function ColumnFilter({
     </>
   );
 }
-
-export default ColumnFilter;

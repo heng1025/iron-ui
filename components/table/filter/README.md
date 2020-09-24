@@ -4,23 +4,20 @@
 
 ```hooks.js --- separate state and func
 index.jsx --- component entry
-index.less --- component style
-FilterContent.jsx --- select,checkbox and so on
+Widget.jsx --- select,checkbox and so on
 ```
 
 ### Get Started
 
 1. import component and hooks
 
-`import ColumnTitle, { actionType,useColumnFilter } from './ColumnTitle';`
+`import FilterTitle, { useColumnFilter } from 'table';`
 
 2. use component
 
 ```js
 const { clearFilter, fetchTableList, handlePageChange, getTitleProps } = useColumnFilter({
-  dispatch,
-  queryList: (params:any)=>void, // query list func
-  action: string,
+  request: (column,params:any)=>void, // query list func
   page: number|string,
   pageSize: number|string,
   reset?: Function,
@@ -29,20 +26,10 @@ const { clearFilter, fetchTableList, handlePageChange, getTitleProps } = useColu
 <Table {...porps}>
  <Column
     dataIndex="userName"
-    title={
-      <ColumnTitle {...getTitleProps('userName')}>
-        <FormattedMessage id="alert-center.owner" />
-      </ColumnTitle>
-    }
+    title={<FilterTitle {...getTitleProps('name')}>name</FilterTitle>}
   />
 </Table>
 ```
-
-### MODEL (request)
-
-- 'global/fetchTableFilterItems'
-- 'global/fetchTableList'
-- state
 
 ```
 {
@@ -106,6 +93,7 @@ type handlePageChange = {
 
 ```typescript
 type ResParams = {
+  request: Function;
   curColumn: string;
   searchConditions: Conditions;
   conditions: Conditions;
@@ -136,11 +124,9 @@ interface Prop extends ResParams {
 
 ```typescript
 function useColumnFilter({
-  dispatch:Function,
-  queryList:Function,
+  request:Function,
   pageSize:number,
   options = {},
-  tableName = string,
 }):{
     conditions:Conditions,
     clearFilter:Function,
@@ -150,24 +136,4 @@ function useColumnFilter({
     handleFilterCommit:Function,
     getTitleProps(column:string):ResParams:
   }
-```
-
-### How to use with Hoc
-
-```jsx
-@withFilterList({ tableName: 'SLOP_BIZ.V_ALERT_CENTER' })
-class AlertTable extends React.Component {
-  async componentDidMount() {
-    const { handleFilterCommit } = this.props;
-    handleFilterCommit(column, conditions);
-  }
-  // ...
-}
-
-<AlertTable
-  {...this.props}
-  pageSize={pageSize} // required
-  options={options}
-  queryList={queryList}
-/>;
 ```

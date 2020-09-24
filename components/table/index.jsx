@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+export { FilterTitle, useColumnFilter } from './filter';
 
 const getWidth = width => String(width).replace(/(\d{1,9})(.*)/g, '$1px');
 
