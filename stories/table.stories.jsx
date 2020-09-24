@@ -37,7 +37,6 @@ Scroll.args = { scroll: { x: 120, y: 200 } };
 export const Filter = () => {
   const { getTitleProps } = useColumnFilter({
     request: column => {
-      console.log('Filter -> column', column);
       return new Promise((resolve, reject) => {
         resolve(dataSource.map(item => ({ value: item[column], count: '12' })));
       });
@@ -45,7 +44,6 @@ export const Filter = () => {
     page: 1,
     pageSize: 10,
   });
-  console.log('Filter -> getTitleProps', getTitleProps);
 
   return (
     <Table
