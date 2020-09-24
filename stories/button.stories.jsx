@@ -7,5 +7,5 @@ export default {
 };
 
 export const Primary = args => {
-  return <Button {...args} />;
+  return <Button {...args}>i am button</Button>;
 };
