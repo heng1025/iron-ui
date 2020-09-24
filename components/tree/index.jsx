@@ -7,10 +7,10 @@ import { VListWithDynamic, Title } from './utils';
 
 const ROW_HEIGHT = 26;
 
-const nodeHasChildren = (node) => node.children && node.children.length;
+const nodeHasChildren = node => node.children && node.children.length;
 
 const transformTreeData = (data, defaultExpandAll = false, parent) =>
-  data.map((item) => {
+  data.map(item => {
     if (parent) {
       item.parent = parent;
     }
@@ -39,7 +39,7 @@ function getExpandedItemCount(item) {
 }
 
 const updateSubNodeState = (nodes, checked) => {
-  nodes.forEach((subNode) => {
+  nodes.forEach(subNode => {
     subNode.checked = checked;
     subNode.indeterminate = false;
     if (nodeHasChildren(subNode)) {
@@ -50,7 +50,7 @@ const updateSubNodeState = (nodes, checked) => {
 
 const updateSupNodeState = (parentNode, checked) => {
   const isNotEqual = parentNode.children.some(
-    (item) => item.checked !== checked || item.indeterminate
+    item => item.checked !== checked || item.indeterminate
   );
   if (isNotEqual) {
     parentNode.checked = false;
@@ -65,7 +65,7 @@ const updateSupNodeState = (parentNode, checked) => {
 };
 
 const updateTreeNodeState = (trees, checkedKeys) => {
-  trees.forEach((node) => {
+  trees.forEach(node => {
     const isChecked = checkedKeys.includes(node.id);
     node.checked = isChecked;
     node.indeterminate = false;
@@ -79,7 +79,7 @@ const updateTreeNodeState = (trees, checkedKeys) => {
 };
 
 const getCheckedNodes = (trees, checkedNodes = [], checkedKeys = []) => {
-  trees.forEach((node) => {
+  trees.forEach(node => {
     if (nodeHasChildren(node)) {
       getCheckedNodes(node.children, checkedNodes);
     }
@@ -128,7 +128,7 @@ function VirtualTree({
     const offset = deepness * (hasChildren ? 18 : 10);
 
     if (expanded && hasChildren) {
-      nodes = item.children.map((v) => renderItem(v, deepness + 1));
+      nodes = item.children.map(v => renderItem(v, deepness + 1));
     }
 
     nodes.unshift(

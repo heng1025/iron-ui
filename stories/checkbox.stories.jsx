@@ -6,11 +6,11 @@ export default {
   component: Checkbox,
 };
 
-export const Primary = (args) => {
+export const Primary = args => {
   return (
     <Checkbox
       {...args}
-      onChange={(e) => {
+      onChange={e => {
         console.log('checked', e.target.checked);
       }}
     >

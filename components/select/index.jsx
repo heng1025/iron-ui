@@ -85,7 +85,7 @@ const VirtualSelect = forwardRef((props, ref) => {
 
   useEffect(() => {
     const optionWrap = selectRef.current;
-    const handler = (e) => {
+    const handler = e => {
       if (optionWrap && !optionWrap.contains(e.target)) {
         setSearchVisible(false);
       }
@@ -109,7 +109,7 @@ const VirtualSelect = forwardRef((props, ref) => {
   }, [searchVisible]);
 
   // select operation
-  const handleClick = (item) => {
+  const handleClick = item => {
     setSelectedValue(item.key);
     setLabel(item.value);
     setSearchVisible(false);
@@ -119,16 +119,16 @@ const VirtualSelect = forwardRef((props, ref) => {
   };
 
   const handleChange = useCallback(
-    debounce((inputVal) => {
+    debounce(inputVal => {
       if (onSearch) {
         onSearch(inputVal);
       } else if (showSearch) {
         let sList = [];
         if (filterOption) {
-          sList = children.filter((item) => filterOption(inputVal, item));
+          sList = children.filter(item => filterOption(inputVal, item));
         } else {
           const formatInput = decodeURIComponent(inputVal).toLowerCase();
-          sList = children.filter((item) => {
+          sList = children.filter(item => {
             const { value: text = item.key } = item.props;
             const formatVal = String(text).toLowerCase();
             return formatVal.includes(formatInput);
@@ -140,7 +140,7 @@ const VirtualSelect = forwardRef((props, ref) => {
     [children]
   );
 
-  const onChangeInput = (e) => {
+  const onChangeInput = e => {
     const inputVal = e.target.value;
     setSearchValue(inputVal);
     handleChange(inputVal);

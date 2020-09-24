@@ -56,7 +56,7 @@ const Checkbox = forwardRef((props, ref) => {
           defaultChecked={defaultChecked}
           // expect boolean
           checked={!!isChecked}
-          onChange={(e) => {
+          onChange={e => {
             setChecked(e.target.checked);
             if (onChange) {
               onChange(e);
@@ -67,7 +67,7 @@ const Checkbox = forwardRef((props, ref) => {
           className={classNames(
             'iron-checkbox-square',
             isChecked ? 'iron-checkbox-checked' : '',
-            disabled ? 'iron-checkbox-disabled' : '',
+            disabled ? 'iron-checkbox-disabled' : ''
           )}
         >
           {getCheckIcon()}

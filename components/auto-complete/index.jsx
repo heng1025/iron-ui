@@ -40,7 +40,7 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
       if (inputVal) {
         const formatInput = decodeURIComponent(inputVal).toLowerCase();
         if (isFixed) {
-          const matchValue = list.find((item) => {
+          const matchValue = list.find(item => {
             const { value: text = item.key } = item.props;
             const formatVal = String(text).toLowerCase();
             return formatVal === formatInput;
@@ -49,9 +49,9 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
         } else {
           let sList = [];
           if (condition) {
-            sList = list.filter((item) => condition(inputVal, item));
+            sList = list.filter(item => condition(inputVal, item));
           } else {
-            sList = list.filter((item) => {
+            sList = list.filter(item => {
               const { value: text = item.key } = item.props;
               const formatVal = String(text).toLowerCase();
               return formatVal.includes(formatInput);
@@ -78,7 +78,7 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
 
   useEffect(() => {
     const optionWrap = selectRef.current;
-    const handler = (e) => {
+    const handler = e => {
       if (optionWrap && !optionWrap.contains(e.target)) {
         setSearchVisible(false);
       }
@@ -89,7 +89,7 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
     };
   }, []);
 
-  const handleClick = (item) => {
+  const handleClick = item => {
     setSelectedValue(item.key);
     setSearchValue(item.value);
     setSearchVisible(false);
@@ -99,7 +99,7 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
     }
   };
 
-  const onChangeInput = (e) => {
+  const onChangeInput = e => {
     const inputVal = e.target.value;
     setSearchValue(inputVal);
     if (onChange) {

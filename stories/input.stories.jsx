@@ -7,7 +7,7 @@ export default {
   component: Input,
 };
 
-export const Primary = (args) => {
+export const Primary = args => {
   return <Input {...args} placeholder="please input" />;
 };
 

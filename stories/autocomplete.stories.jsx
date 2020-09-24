@@ -13,9 +13,9 @@ export default {
   component: VirtualAutoComplete,
 };
 
-export const Primary = (args) => (
+export const Primary = args => (
   <VirtualAutoComplete {...args} placeholder="please input">
-    {options.map((v) => (
+    {options.map(v => (
       <div key={v}>{v}</div>
     ))}
   </VirtualAutoComplete>

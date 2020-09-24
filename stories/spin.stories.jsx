@@ -6,7 +6,7 @@ export default {
   component: Spin,
 };
 
-export const Primay = (args) => {
+export const Primay = args => {
   return <Spin {...args} spinning />;
 };
 

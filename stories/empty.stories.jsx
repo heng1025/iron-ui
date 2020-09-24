@@ -6,7 +6,7 @@ export default {
   component: Empty,
 };
 
-export const Primary = (args) => {
+export const Primary = args => {
   return <Empty {...args} />;
 };
 

@@ -26,7 +26,7 @@ export default {
   component: VirtualTree,
 };
 
-export const Primary = (args) => <VirtualTree {...args} treeData={treeData} />;
+export const Primary = args => <VirtualTree {...args} treeData={treeData} />;
 
 export const Checkable = Primary.bind();
 Checkable.args = {

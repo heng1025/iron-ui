@@ -44,7 +44,7 @@ export function Options({
   }
 
   if (elementLen <= 6) {
-    return children.map((c) => (
+    return children.map(c => (
       <VRow key={c.key || c.value} {...rest}>
         {c}
       </VRow>

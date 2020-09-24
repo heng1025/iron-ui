@@ -27,9 +27,9 @@ export default {
   },
 };
 
-export const Primary = (args) => (
+export const Primary = args => (
   <VirtualSelect {...args}>
-    {options.map((v) => (
+    {options.map(v => (
       <div key={v}>{v}</div>
     ))}
   </VirtualSelect>
@@ -63,7 +63,7 @@ export const Loading = () => {
 
   return (
     <VirtualSelect loading>
-      {data.map((v) => (
+      {data.map(v => (
         <div key={v}>{v}</div>
       ))}
     </VirtualSelect>
