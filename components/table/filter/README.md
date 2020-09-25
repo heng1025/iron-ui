@@ -17,9 +17,9 @@ Widget.jsx --- select,checkbox and so on
 
 ```js
 const { clearFilter, fetchTableList, handlePageChange, getTitleProps } = useColumnFilter({
-  request: (column,params:any)=>void, // query list func
-  page: number|string,
-  pageSize: number|string,
+  requestColumnData: (params:any)=>void, // query columns func
+  requestTableData: (params:any)=>void, // query list func
+  pageSize?: number|string,
   reset?: Function,
 });
 

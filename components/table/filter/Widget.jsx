@@ -20,9 +20,9 @@ function FilterSearch({ value, onChange }) {
   return (
     <Input
       placeholder="Input search keyword"
+      className="iron-table-filter-search"
       value={value}
       onChange={onChange}
-      className="iron-table-filter-search"
     />
   );
 }

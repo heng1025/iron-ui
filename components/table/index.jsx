@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 export { FilterTitle, useColumnFilter } from './filter';
 
-const getWidth = width => String(width).replace(/(\d{1,9})(.*)/g, '$1px');
+const getwidth = width => String(width).replace(/(\d{1,9})(.*)/g, '$1px');
 
 const TableRow = ({ columns, className, style, content = {} }) => {
   return (
@@ -12,7 +12,7 @@ const TableRow = ({ columns, className, style, content = {} }) => {
           <li
             key={column.key || column.dataIndex}
             style={{
-              width: getWidth(column.width),
+              width: getwidth(column.width),
               textAlign: column.align || 'left',
             }}
           >

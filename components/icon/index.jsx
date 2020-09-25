@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Icons from '../../utils/antdIcon';
 
-const Icon = ({ type, style, rotate, className }) => {
+const Icon = ({ type, rotate, ...rest }) => {
   const { icon } = Object.values(Icons).find(i => i.name === type);
   return (
-    <i aria-label={`icon: ${type}`} className={className} style={style}>
+    <i aria-label={`icon: ${type}`} {...rest}>
       <icon.tag
         {...icon.attrs}
         width="1em"

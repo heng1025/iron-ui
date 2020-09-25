@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-const Input = forwardRef(({ suffix, ...rest }, ref) => {
+const Input = forwardRef(({ suffix, className, ...rest }, ref) => {
   return (
-    <div className="iron-input-wrapper">
+    <div className={classNames('iron-input-wrapper', className)}>
       <input
         {...rest}
         ref={ref}

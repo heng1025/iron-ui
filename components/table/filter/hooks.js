@@ -120,8 +120,7 @@ export function useFilterPicker({
 export function useColumnFilter({
   requestColumnData,
   requestTableData,
-  pageSize,
-  options = {},
+  pageSize = 10,
 }) {
   // { column: '', value: '', condition: '7' }
   const [conditions, setConditions] = useState([]);
@@ -140,10 +139,6 @@ export function useColumnFilter({
   }
 
   async function fetchTableList(params = {}) {
-    const { clearSelectedKeys } = options;
-    if (clearSelectedKeys) {
-      clearSelectedKeys();
-    }
     const result = await requestTableData({ column: curColumn, ...params });
     setDataSource(result);
   }

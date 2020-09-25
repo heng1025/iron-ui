@@ -10,7 +10,6 @@ import Button from '../../button';
 export { useColumnFilter } from './hooks';
 
 export function FilterTitle({
-  loading,
   children,
   columnType = 'text', // text, number, date, dateTime
   sort,
@@ -23,6 +22,7 @@ export function FilterTitle({
 }) {
   const [isFiltered, setFiltered] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [filterItems, setFilterItems] = useState([]);
   const [checkedList, setCheckedList] = useState([]);
   const [isAdvanceAction, setAdvanceAction] = useState(false);
@@ -79,12 +79,18 @@ export function FilterTitle({
   async function handleVisibleChange(v) {
     setVisible(v);
     if (v) {
-      const filters = await requestColumnData({
-        column: curColumn,
-        searchConditions,
-        conditions: conditions.filter(item => item.column !== curColumn),
-      });
-      setFilterItems(filters || []);
+      setLoading(true);
+      try {
+        const filters = await requestColumnData({
+          column: curColumn,
+          searchConditions,
+          conditions: conditions.filter(item => item.column !== curColumn),
+        });
+        setFilterItems(filters || []);
+      } catch (error) {
+        console.log('err', error);
+      }
+      setLoading(false);
     }
   }
 
@@ -148,9 +154,8 @@ export function FilterTitle({
   }
 
   return (
-    <>
+    <div>
       <Advance
-        loading={loading}
         columnType={columnType}
         filterList={filterItems}
         visible={isAdvanceVisible}
@@ -201,16 +206,14 @@ export function FilterTitle({
           </>
         }
       >
-        <div>
-          <Icon
-            type="filter"
-            className={classNames('filter-icon', {
-              active: isFiltered,
-            })}
-          />
-          <span>{children}</span>
-        </div>
+        <Icon
+          type="filter"
+          className={classNames('iron-table-filter-icon', {
+            active: isFiltered,
+          })}
+        />
       </Popover>
-    </>
+      <span>{children}</span>
+    </div>
   );
 }

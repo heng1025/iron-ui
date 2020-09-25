@@ -49,10 +49,14 @@ export const Filter = () => {
             { value: '20200815', count: 12 },
             { value: '20210716', count: 12 },
           ]);
+        } else if (column === 'name') {
+          reject('error happen');
         } else {
-          resolve(
-            dataSource.map(item => ({ value: item[column], count: '12' }))
-          );
+          setTimeout(() => {
+            resolve(
+              dataSource.map(item => ({ value: item[column], count: '12' }))
+            );
+          }, 1000);
         }
       });
     },
@@ -65,8 +69,6 @@ export const Filter = () => {
         }
       });
     },
-    page: 1,
-    pageSize: 10,
   });
 
   useEffect(() => {

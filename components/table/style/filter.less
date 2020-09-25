@@ -43,6 +43,15 @@
       font-size: 12px;
     }
   }
+  &-search {
+    .@{iron-prefix}-input {
+      border: 0;
+      border-bottom: 1px solid #bdd1e2;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
   &-title {
     padding: 4px 10px;
     color: #fff;
@@ -51,9 +60,9 @@
     .icon-txt {
       display: inline-flex;
       align-items: center;
-      cursor: pointer;
-      vertical-align: middle;
       margin-right: 6px;
+      vertical-align: middle;
+      cursor: pointer;
       &.active {
         color: #09f1e6;
       }
