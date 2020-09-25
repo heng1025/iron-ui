@@ -1,9 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
-import 'antd/es/row/style/css';
-import 'antd/es/col/style/css';
 import { transformDate, formatValue, transformWord } from './common';
 import Icon from '../../icon';
 import Tree from '../../tree';
@@ -11,6 +7,7 @@ import Input from '../../input';
 import Empty from '../../empty';
 import Spin from '../../spin';
 import Checkbox from '../../checkbox';
+import { Row, Col } from '../../grid';
 import { Options as VirtualOptions } from '../../select';
 import { useFilterPicker } from './hooks';
 

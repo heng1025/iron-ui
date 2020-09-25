@@ -3,17 +3,14 @@ import Modal from 'antd/es/modal';
 import Form from 'antd/es/form';
 import Radio from 'antd/es/radio';
 import DatePicker from 'antd/es/date-picker';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
 import 'antd/es/modal/style/css';
 import 'antd/es/form/style/css';
 import 'antd/es/radio/style/css';
 import 'antd/es/date-picker/style/css';
-import 'antd/es/row/style/css';
-import 'antd/es/col/style/css';
 import Icon from '../../icon';
 import Button from '../../button';
 import VirtualSelect from '../../select';
+import { Row, Col } from '../../grid';
 import VirtualAutoComplete from '../../auto-complete';
 import {
   types,
@@ -71,8 +68,8 @@ function Condtion({ columnType, searchList, field }) {
           </VirtualSelect>
         </Form.Item>
       </Col>
-      <Col span={15} offset={1}>
-        <Row type="flex" align="bottom" justify="space-between">
+      <Col span={15} style={{ marginLeft: 10 }}>
+        <Row align="bottom" justify="space-between">
           <Col style={{ flex: 1 }}>
             <Form.Item name={field.value}>
               <VirtualAutoComplete isFixedMode onChange={v => setDateVal(v)}>
