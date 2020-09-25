@@ -31,6 +31,19 @@ const Popover = ({
     }
   }, []);
 
+  useEffect(() => {
+    const optionWrap = popoverRef.current;
+    const handler = e => {
+      if (optionWrap && !optionWrap.contains(e.target)) {
+        onVisibleChange(false);
+      }
+    };
+    window.addEventListener('click', handler);
+    return () => {
+      window.removeEventListener('click', handler);
+    };
+  }, []);
+
   return (
     <div ref={popoverRef} className="iron-popover-wrapper">
       {createPortal(

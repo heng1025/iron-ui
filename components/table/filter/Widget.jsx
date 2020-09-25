@@ -102,7 +102,13 @@ export function FilterHeader({
 }
 
 // type = contain (7)
-function FilterCheckbox({ loading, columnType, filterList, ...rest }) {
+function FilterCheckbox({
+  loading,
+  columnType,
+  filterList,
+  requestErr,
+  ...rest
+}) {
   const {
     isCheckAll,
     searchVal,
@@ -151,14 +157,17 @@ function FilterCheckbox({ loading, columnType, filterList, ...rest }) {
             </VirtualOptions>
           </div>
         ) : (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description={requestErr}
+          />
         )}
       </Spin>
     </div>
   );
 }
 
-function FilterTree({ loading, filterList, ...rest }) {
+function FilterTree({ loading, filterList, requestErr, ...rest }) {
   const {
     isCheckAll,
     searchVal,
@@ -196,7 +205,7 @@ function FilterTree({ loading, filterList, ...rest }) {
             </div>
           </div>
         ) : (
-          <Empty />
+          <Empty description={requestErr} />
         )}
       </Spin>
     </div>

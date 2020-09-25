@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import Popover from 'antd/es/popover';
-// import 'antd/es/popover/style/css';
 import classNames from 'classnames';
 import Advance from './Advance';
 import { FilterHeader, FilterPicker } from './Widget';
@@ -24,6 +22,7 @@ export function FilterTitle({
   const [isFiltered, setFiltered] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [requestErr, setRequestErr] = useState('');
   const [filterItems, setFilterItems] = useState([]);
   const [checkedList, setCheckedList] = useState([]);
   const [isAdvanceAction, setAdvanceAction] = useState(false);
@@ -78,7 +77,6 @@ export function FilterTitle({
   }
 
   async function handleVisibleChange(v) {
-    console.log('handleVisibleChange -> v', v);
     setVisible(v);
     if (v) {
       setLoading(true);
@@ -90,7 +88,7 @@ export function FilterTitle({
         });
         setFilterItems(filters || []);
       } catch (error) {
-        console.log('err', error);
+        setRequestErr(typeof error === 'string' ? error : 'Err happened');
       }
       setLoading(false);
     }
@@ -188,6 +186,7 @@ export function FilterTitle({
             <div className="iron-table-filter">
               <FilterPicker
                 loading={loading}
+                requestErr={requestErr}
                 filterList={filterItems}
                 columnType={columnType}
                 curColumn={curColumn}
