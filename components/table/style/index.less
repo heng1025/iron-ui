@@ -3,23 +3,23 @@
 @table-prefix-cls: ~'@{iron-prefix}-table';
 
 ul {
-  list-style: none;
   margin: 0 !important;
   padding: 0 !important;
+  list-style: none;
 }
 
 .@{table-prefix-cls} {
   width: 100%;
-  font-size: 14px;
   overflow: hidden;
+  font-size: 14px;
   &-row {
     display: inline-flex;
     flex-wrap: nowrap;
     align-items: center;
     border-bottom: 1px solid #f0f0f0;
     > li {
-      padding: 12px;
       box-sizing: border-box;
+      padding: 12px;
     }
   }
   &-header {

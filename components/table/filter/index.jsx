@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Popover from 'antd/es/popover';
-import 'antd/es/popover/style/css';
+// import Popover from 'antd/es/popover';
+// import 'antd/es/popover/style/css';
 import classNames from 'classnames';
 import Advance from './Advance';
 import { FilterHeader, FilterPicker } from './Widget';
 import Icon from '../../icon';
 import Button from '../../button';
+import Popover from '../../popover';
 
 export { useColumnFilter } from './hooks';
 
@@ -77,6 +78,7 @@ export function FilterTitle({
   }
 
   async function handleVisibleChange(v) {
+    console.log('handleVisibleChange -> v', v);
     setVisible(v);
     if (v) {
       setLoading(true);
