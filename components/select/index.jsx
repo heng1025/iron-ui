@@ -180,10 +180,9 @@ const VirtualSelect = forwardRef((props, ref) => {
         placeholder={placeholder}
         disabled={disabled}
         value={label}
-        className={classNames(
-          'iron-select-input',
-          showSearch ? 'iron-select-default' : ''
-        )}
+        className={classNames('iron-select-input', {
+          'iron-select-default': showSearch,
+        })}
         style={{ display: !searchVisible ? 'inline-block' : 'none' }}
         suffix={
           <>
@@ -228,10 +227,9 @@ const VirtualSelect = forwardRef((props, ref) => {
       {searchVisible && (
         <div
           style={optionContainerStyle}
-          className={classNames(
-            'iron-select-options',
-            filterList.length === 0 ? 'empty' : ''
-          )}
+          className={classNames('iron-select-options', {
+            empty: filterList.length === 0,
+          })}
         >
           {optionTitle}
           <Options

@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
-// import Icon from '../icon';
 
 const Radio = forwardRef((props, ref) => {
   const {
@@ -22,17 +21,14 @@ const Radio = forwardRef((props, ref) => {
   return (
     <label
       htmlFor="iron-radio"
-      className={classNames(
-        className,
-        'iron-radio-wrapper',
-        disabled ? 'iron-checkbox-wrapper-disabled' : ''
-      )}
+      className={classNames(className, 'iron-radio-wrapper', {
+        'iron-checkbox-wrapper-disabled': disabled,
+      })}
     >
       <span
-        className={classNames(
-          'iron-radio',
-          disabled ? 'iron-radio-disabled' : ''
-        )}
+        className={classNames('iron-radio', {
+          'iron-radio-disabled': disabled,
+        })}
       >
         <input
           ref={ref}
@@ -41,10 +37,9 @@ const Radio = forwardRef((props, ref) => {
           name="iron-raido"
           value={value}
           {...rest}
-          className={classNames(
-            'iron-radio-input',
-            disabled ? 'iron-radio-input-disabled' : ''
-          )}
+          className={classNames('iron-radio-input', {
+            'iron-radio-input-disabled': disabled,
+          })}
           disabled={disabled}
           defaultChecked={defaultChecked}
           // expect boolean
@@ -56,6 +51,14 @@ const Radio = forwardRef((props, ref) => {
             }
           }}
         />
+        <span
+          className={classNames('iron-radio-circle', {
+            'iron-radio-circle-checked': isChecked,
+            'iron-radio-circle-disabled': disabled,
+          })}
+        >
+          {isChecked && <em className="iron-radio-circle-fill"></em>}
+        </span>
       </span>
       {children && <span className="iron-radio-label">{children}</span>}
     </label>

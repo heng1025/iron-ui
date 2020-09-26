@@ -7,7 +7,7 @@ const Input = forwardRef(({ suffix, className, ...rest }, ref) => {
       <input
         {...rest}
         ref={ref}
-        className={classNames('iron-input', suffix ? 'iron-input-icon' : '')}
+        className={classNames('iron-input', { 'iron-input-icon': suffix })}
       />
       {suffix && <span className="iron-input-suffix">{suffix}</span>}
     </div>

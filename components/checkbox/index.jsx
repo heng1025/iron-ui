@@ -32,28 +32,24 @@ const Checkbox = forwardRef((props, ref) => {
   return (
     <label
       htmlFor="iron-checkbox"
-      className={classNames(
-        className,
-        'iron-checkbox-wrapper',
-        disabled ? 'iron-checkbox-wrapper-disabled' : ''
-      )}
+      className={classNames(className, 'iron-checkbox-wrapper', {
+        'iron-checkbox-wrapper-disabled': disabled,
+      })}
     >
       <span
-        className={classNames(
-          'iron-checkbox',
-          !children ? 'iron-checkbox-no-children' : '',
-          disabled ? 'iron-checkbox-disabled' : ''
-        )}
+        className={classNames('iron-checkbox', {
+          'iron-checkbox-no-children': !children,
+          'iron-checkbox-disabled': disabled,
+        })}
       >
         <input
           ref={ref}
           type="checkbox"
           id="iron-checkbox"
           {...rest}
-          className={classNames(
-            'iron-checkbox-input',
-            disabled ? 'iron-checkbox-input-disabled' : ''
-          )}
+          className={classNames('iron-checkbox-input', {
+            'iron-checkbox-input-disabled': disabled,
+          })}
           disabled={disabled}
           defaultChecked={defaultChecked}
           // expect boolean
@@ -66,16 +62,14 @@ const Checkbox = forwardRef((props, ref) => {
           }}
         />
         <span
-          className={classNames(
-            'iron-checkbox-square',
-            isChecked ? 'iron-checkbox-checked' : '',
-            disabled ? 'iron-checkbox-disabled' : ''
-          )}
+          className={classNames('iron-checkbox-square', {
+            'iron-checkbox-checked': isChecked,
+            'iron-checkbox-disabled': disabled,
+          })}
         >
           {getCheckIcon()}
         </span>
       </span>
-
       {children && <span className="iron-checkbox-label">{children}</span>}
     </label>
   );
