@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useState,
-  useRef,
-  useContext,
-} from 'react';
+import React, { forwardRef, useEffect, useState, useContext } from 'react';
 import classNames from 'classnames';
 import Icon from '../icon';
 import CheckboxGroupContext, { CheckboxGroupContextProvider } from './context';
@@ -16,10 +10,19 @@ const Checkbox = forwardRef((props, ref) => {
     ...restProps,
   };
 
+  const handleChange = e => {
+    if (props.onChange) {
+      props.onChange(e);
+    }
+    if (context && context.onChange) {
+      context.onChange(e);
+    }
+  };
+
   if (context) {
+    checkboxProps.onChange = handleChange;
     checkboxProps.checked = context.value.some(v => v === props.value);
     checkboxProps.disabled = props.disabled || context.disabled;
-    checkboxProps.onChange = props.onChange;
   }
   const {
     disabled = false,
@@ -69,7 +72,9 @@ const Checkbox = forwardRef((props, ref) => {
           // expect boolean
           checked={!!isChecked}
           onChange={e => {
-            setChecked(e.target.checked);
+            if (e.target && e.target.checked) {
+              setChecked(e.target.checked);
+            }
             if (onChange) {
               onChange(e);
             }
@@ -96,46 +101,31 @@ const Group = ({
   disabled,
   children,
 }) => {
-  const checkboxGroupRef = useRef(null);
   const [checkedVals, setCheckedVals] = useState([...defaultValue, ...value]);
 
-  useEffect(() => {
-    const ele = checkboxGroupRef.current;
+  const handleChange = e => {
+    const { checked, value: val } = e.target || {};
     let values = [...checkedVals];
-    const handler = e => {
-      const { checked, value: val } = e.target;
-      if (checked) {
-        values.push(val);
-      } else {
-        values = values.filter(v => v !== val);
-      }
-      setCheckedVals(values);
-      if (onChange) {
-        onChange(values);
-      }
-    };
-    if (ele) {
-      ele.addEventListener('change', handler);
+    if (checked) {
+      values.push(val);
+    } else {
+      values = values.filter(v => v !== val);
     }
-
-    return () => {
-      if (ele) {
-        ele.removeEventListener('change', handler);
-      }
-    };
-  }, [onChange, checkedVals]);
+    setCheckedVals(values);
+    if (onChange) {
+      onChange(values);
+    }
+  };
 
   return (
     <CheckboxGroupContextProvider
       value={{
-        onChange,
+        onChange: handleChange,
         value,
         disabled,
       }}
     >
-      <div className="iron-checkbox-group" ref={checkboxGroupRef}>
-        {children}
-      </div>
+      <div className="iron-checkbox-group">{children}</div>
     </CheckboxGroupContextProvider>
   );
 };

@@ -120,8 +120,9 @@ const VirtualSelect = forwardRef((props, ref) => {
     }
   };
 
-  const handleChange = useCallback(() => {
-    return debounce(inputVal => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleChange = useCallback(
+    debounce(inputVal => {
       if (onSearch) {
         onSearch(inputVal);
       } else if (showSearch) {
@@ -138,8 +139,9 @@ const VirtualSelect = forwardRef((props, ref) => {
         }
         setFilterList(!inputVal ? children : sList);
       }
-    }, 500);
-  }, [filterOption, onSearch, showSearch, children]);
+    }, 500),
+    [filterOption, onSearch, showSearch, children]
+  );
 
   const onChangeInput = e => {
     const inputVal = e.target.value;

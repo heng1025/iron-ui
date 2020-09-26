@@ -15,6 +15,16 @@ export function useFilterPicker({
   const [initList, setInitList] = useState([]);
   const [checkedValues, setCheckedValues] = useState([]);
 
+  const updateCheckAllState = useCallback(
+    (checkedList = []) => {
+      const cLen = checkedList.length;
+      const isAllChecked = cLen > 0 && cLen === filterList.length;
+      setIndeterminate(cLen === 0 ? false : !isAllChecked);
+      setCheckAll(isAllChecked);
+    },
+    [filterList]
+  );
+
   useEffect(() => {
     setSearchVal('');
     const curFilter = conditions.find(item => item.column === curColumn);
@@ -46,14 +56,7 @@ export function useFilterPicker({
       setCheckedValues(filterList);
       updateCheckAllState(filterList);
     }
-  }, [filterList, curColumn, conditions]);
-
-  function updateCheckAllState(checkedList = []) {
-    const cLen = checkedList.length;
-    const isAllChecked = cLen > 0 && cLen === filterList.length;
-    setIndeterminate(cLen === 0 ? false : !isAllChecked);
-    setCheckAll(isAllChecked);
-  }
+  }, [filterList, curColumn, conditions, onCheckedList, updateCheckAllState]);
 
   function handleCheckItem(e) {
     const { value: cVal, checked } = e.target;
@@ -85,6 +88,7 @@ export function useFilterPicker({
     updateCheckAllState(checkedList);
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceInputChange = useCallback(
     debounce(value => {
       const sList = filterList.filter(item => {
@@ -96,11 +100,12 @@ export function useFilterPicker({
       onCheckedList(checkedList);
       updateCheckAllState(checkedList);
     }, 500),
-    [filterList, initList]
+    [filterList, initList, onCheckedList, updateCheckAllState]
   );
 
   function handleSeach(e) {
     const { value = '' } = e.target;
+    console.log('handleSeach -> value', value);
     setSearchVal(value);
     debounceInputChange(value);
   }

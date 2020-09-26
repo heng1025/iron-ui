@@ -35,8 +35,9 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
   const [searchValue, setSearchValue] = useState(undefined);
   const [filterList, setFilterList] = useState([]);
 
-  const queryOptions = useCallback(() => {
-    return debounce((inputVal, list, condition, isFixed) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const queryOptions = useCallback(
+    debounce((inputVal, list, condition, isFixed) => {
       if (inputVal) {
         const formatInput = decodeURIComponent(inputVal).toLowerCase();
         if (isFixed) {
@@ -63,8 +64,9 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
         setFilterList(list);
         setSelectedValue('');
       }
-    }, 100);
-  }, []);
+    }, 100),
+    []
+  );
 
   useEffect(() => {
     setSearchValue(value);

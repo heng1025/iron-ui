@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import Advance from './Advance';
 import { FilterHeader, FilterPicker } from './Widget';
@@ -102,9 +102,12 @@ export function FilterTitle({
     }
   }
 
-  function handleCheckList(val) {
+  const handleCheckList = useCallback(val => {
     setCheckedList(val);
-  }
+  }, []);
+  // function handleCheckList(val) {
+  //   setCheckedList(val);
+  // }
 
   async function handleClear() {
     const updatedConditions = conditions.filter(

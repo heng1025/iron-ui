@@ -40,5 +40,30 @@ export const Group = args => {
   );
 };
 
+export const GroupGrid = args => {
+  return (
+    <Radio.Group
+      defaultValue="2"
+      {...args}
+      onChange={e => {
+        console.log('selected value', e.target.value);
+      }}
+    >
+      <div>
+        <Radio value="1">apple</Radio>
+      </div>
+      <div>
+        <Radio value="2">orange</Radio>
+      </div>
+      <div>
+        <Radio value="3">bnana</Radio>
+      </div>
+      <div>
+        <Radio value="4">watermelon</Radio>
+      </div>
+    </Radio.Group>
+  );
+};
+
 export const GroupDisabled = Group.bind();
 GroupDisabled.args = { disabled: true };

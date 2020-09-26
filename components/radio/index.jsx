@@ -1,17 +1,29 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState, useContext } from 'react';
 import classNames from 'classnames';
+import RadioGroupContext, { RadioGroupContextProvider } from './context';
 
 const Radio = forwardRef((props, ref) => {
+  const { children, value, className, ...restProps } = props;
+
+  const context = useContext(RadioGroupContext);
+  const radioProps = {
+    ...restProps,
+  };
+
+  if (context) {
+    radioProps.onChange = context.onChange || props.onChange;
+    radioProps.checked = context.value === props.value;
+    radioProps.disabled = props.disabled || context.disabled;
+  }
+
   const {
-    children,
-    value,
-    className,
     disabled = false,
     checked = false,
     defaultChecked = false,
     onChange,
-    ...rest
-  } = props;
+    ...otherProps
+  } = radioProps;
+
   const [isChecked, setChecked] = useState(false);
 
   // radio group need update
@@ -36,7 +48,7 @@ const Radio = forwardRef((props, ref) => {
           value={value}
           disabled={disabled}
           checked={isChecked}
-          {...rest}
+          {...otherProps}
           className={classNames('iron-radio-input', {
             'iron-radio-input-disabled': disabled,
           })}
@@ -61,42 +73,32 @@ const Radio = forwardRef((props, ref) => {
   );
 });
 
-const Group = ({ value, defaultValue, disabled, onChange, children }) => {
-  const radioGroupRef = useRef(null);
-  const [curVal, setVal] = useState(value);
-  const [curDefaultVal, setDefaultVal] = useState(defaultValue);
+const Group = ({
+  value,
+  defaultValue,
+  disabled = false,
+  onChange,
+  children,
+}) => {
+  const [curVal, setVal] = useState(value || defaultValue);
 
-  useEffect(() => {
-    const ele = radioGroupRef.current;
-    const handler = e => {
-      setDefaultVal('');
-      setVal(e.target.value);
-      if (onChange) {
-        onChange(e);
-      }
-    };
-    if (ele) {
-      ele.addEventListener('change', handler);
+  const handleChange = ev => {
+    setVal(ev.target.value);
+    if (onChange) {
+      onChange(ev);
     }
-
-    return () => {
-      if (ele) {
-        ele.removeEventListener('change', handler);
-      }
-    };
-  }, [onChange]);
+  };
 
   return (
-    <div className="iron-radio-group" ref={radioGroupRef}>
-      {React.Children.map(children, child => {
-        const { props } = child;
-        return React.cloneElement(child, {
-          defaultChecked: curDefaultVal === props.value,
-          checked: curVal === props.value,
-          disabled,
-        });
-      })}
-    </div>
+    <RadioGroupContextProvider
+      value={{
+        onChange: handleChange,
+        value: curVal,
+        disabled,
+      }}
+    >
+      <div className="iron-radio-group">{children}</div>
+    </RadioGroupContextProvider>
   );
 };
 
