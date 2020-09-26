@@ -42,7 +42,7 @@ const Popover = ({
     return () => {
       window.removeEventListener('click', handler);
     };
-  }, []);
+  }, [onVisibleChange]);
 
   return (
     <div ref={popoverRef} className="iron-popover-wrapper">
@@ -58,7 +58,9 @@ const Popover = ({
         />,
         el
       )}
-      <span onClick={() => onVisibleChange(!visible)}>{children}</span>
+      <span onClick={() => onVisibleChange(!visible)} aria-hidden="true">
+        {children}
+      </span>
     </div>
   );
 };

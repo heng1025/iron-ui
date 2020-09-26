@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 const Content = ({ children, title, width = 400, visible, onCancel }) => {
@@ -15,11 +15,11 @@ const Content = ({ children, title, width = 400, visible, onCancel }) => {
     return () => {
       window.removeEventListener('click', handler);
     };
-  }, [visible]);
+  }, [visible, onCancel]);
 
   return (
     <div style={{ display: visible ? 'block' : 'none' }}>
-      <div className="iron-modal-mask"></div>
+      <div className="iron-modal-mask" />
       <div className="iron-modal" style={{ width }} ref={modalRef}>
         {title && <h2 className="iron-modal-title">{title}</h2>}
         <div className="iron-modal-content">{children}</div>

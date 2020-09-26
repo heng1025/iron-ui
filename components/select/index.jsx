@@ -120,8 +120,8 @@ const VirtualSelect = forwardRef((props, ref) => {
     }
   };
 
-  const handleChange = useCallback(
-    debounce(inputVal => {
+  const handleChange = useCallback(() => {
+    return debounce(inputVal => {
       if (onSearch) {
         onSearch(inputVal);
       } else if (showSearch) {
@@ -138,9 +138,8 @@ const VirtualSelect = forwardRef((props, ref) => {
         }
         setFilterList(!inputVal ? children : sList);
       }
-    }, 500),
-    [children]
-  );
+    }, 500);
+  }, [filterOption, onSearch, showSearch, children]);
 
   const onChangeInput = e => {
     const inputVal = e.target.value;

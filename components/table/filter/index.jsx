@@ -28,6 +28,14 @@ export function FilterTitle({
   const [isAdvanceAction, setAdvanceAction] = useState(false);
   const [isAdvanceVisible, setAdvanceVisible] = useState(false);
   const [isResetAdvanceFilter, setResetAdvanceFilter] = useState(false);
+
+  function resetState() {
+    setFiltered(false);
+    setVisible(false);
+    setAdvanceAction(false);
+    setResetAdvanceFilter(true);
+  }
+
   // reset all state
   useEffect(() => {
     if (conditions.length === 0) {
@@ -37,7 +45,7 @@ export function FilterTitle({
     } else {
       setFiltered(conditions.some(item => item.column === curColumn));
     }
-  }, [conditions]);
+  }, [conditions, curColumn]);
 
   function showAdvanceFilter() {
     setAdvanceVisible(true);
@@ -96,13 +104,6 @@ export function FilterTitle({
 
   function handleCheckList(val) {
     setCheckedList(val);
-  }
-
-  function resetState() {
-    setFiltered(false);
-    setVisible(false);
-    setAdvanceAction(false);
-    setResetAdvanceFilter(true);
   }
 
   async function handleClear() {

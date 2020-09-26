@@ -88,7 +88,7 @@ export function FilterHeader({
           aria-hidden="true"
           onClick={onClear}
           className={classNames('iron-table-filter-icon-txt', {
-            disabled: disabled,
+            disabled,
           })}
         >
           <Icon type="delete" className="iron-table-filter-icon" />
@@ -110,7 +110,7 @@ function FilterCheckbox({
     isCheckAll,
     searchVal,
     indeterminate,
-    checkedValues,
+    // checkedValues,
     handleSeach,
     handleCheckAll,
     handleCheckItem,
@@ -137,12 +137,8 @@ function FilterCheckbox({
                 const { value, count } = item;
                 const strVal = String(value);
                 return (
-                  <div>
-                    <Checkbox
-                      key={strVal}
-                      value={value}
-                      onChange={handleCheckItem}
-                    >
+                  <div key={strVal}>
+                    <Checkbox value={value} onChange={handleCheckItem}>
                       <span title={strVal}>
                         {formatValue(columnType, value)}
                       </span>
