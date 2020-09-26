@@ -14,6 +14,18 @@
         }
       }
     }
+    &-disabled {
+      &:hover {
+        .@{radio-prefix-cls} {
+          &-circle {
+            border-color: #d9d9d9 !important;
+          }
+        }
+      }
+      .@{radio-prefix-cls}-label {
+        color: #d9d9d9;
+      }
+    }
   }
 
   position: relative;
@@ -49,13 +61,19 @@
     &-checked {
       border-color: @primary-color;
     }
+    &-disabled {
+      border-color: #d9d9d9;
+      > .@{radio-prefix-cls}-circle-fill {
+        background-color: #d9d9d9;
+      }
+    }
     &-fill {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin-top: 2px;
-      margin-left: 2px;
-      border-radius: 100px;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
       background-color: @primary-color;
     }
   }

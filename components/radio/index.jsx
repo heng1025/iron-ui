@@ -4,25 +4,25 @@ import classNames from 'classnames';
 const Radio = forwardRef((props, ref) => {
   const {
     children,
-    disabled,
-    checked,
-    defaultChecked,
     value,
-    onChange,
     className,
+    disabled = false,
+    checked = false,
+    defaultChecked = false,
+    onChange,
     ...rest
   } = props;
   const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
-    setChecked(checked);
-  }, [checked]);
+    setChecked(defaultChecked || checked);
+  }, [defaultChecked, checked]);
 
   return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
-      htmlFor="iron-radio"
       className={classNames(className, 'iron-radio-wrapper', {
-        'iron-checkbox-wrapper-disabled': disabled,
+        'iron-radio-wrapper-disabled': disabled,
       })}
     >
       <span
@@ -33,17 +33,14 @@ const Radio = forwardRef((props, ref) => {
         <input
           ref={ref}
           type="radio"
-          id="iron-radio"
-          name="iron-raido"
           value={value}
+          disabled={disabled}
+          // expect boolean
+          checked={!!isChecked}
           {...rest}
           className={classNames('iron-radio-input', {
             'iron-radio-input-disabled': disabled,
           })}
-          disabled={disabled}
-          defaultChecked={defaultChecked}
-          // expect boolean
-          checked={!!isChecked}
           onChange={e => {
             setChecked(e.target.checked);
             if (onChange) {
@@ -57,7 +54,7 @@ const Radio = forwardRef((props, ref) => {
             'iron-radio-circle-disabled': disabled,
           })}
         >
-          {isChecked && <em className="iron-radio-circle-fill"></em>}
+          {isChecked && <em className="iron-radio-circle-fill" />}
         </span>
       </span>
       {children && <span className="iron-radio-label">{children}</span>}
@@ -65,4 +62,28 @@ const Radio = forwardRef((props, ref) => {
   );
 });
 
+const Group = ({ value, defaultValue, onChange, children }) => {
+  const [curDefaultVal, setDefaultVal] = useState(defaultValue);
+  const [curVal, setVal] = useState(value);
+  return (
+    <div className="iron-radio-group">
+      {React.Children.map(children, child => {
+        const { props } = child;
+        return React.cloneElement(child, {
+          defaultChecked: curDefaultVal === props.value,
+          checked: curVal === props.value,
+          onChange(e) {
+            setDefaultVal('');
+            setVal(e.target.value);
+            if (onChange) {
+              onChange(e);
+            }
+          },
+        });
+      })}
+    </div>
+  );
+};
+
+Radio.Group = Group;
 export default Radio;

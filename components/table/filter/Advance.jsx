@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'antd/es/form';
 import 'antd/es/form/style/css';
-import Radio from 'antd/es/radio';
-import 'antd/es/radio/style/css';
 import DatePicker from 'antd/es/date-picker';
 import 'antd/es/date-picker/style/css';
 import Icon from '../../icon';
 import Button from '../../button';
 import Modal from '../../modal';
-import VirtualSelect from '../../select';
+import Radio from '../../radio';
 import { Row, Col } from '../../grid';
+import VirtualSelect from '../../select';
 import VirtualAutoComplete from '../../auto-complete';
 import {
   types,
