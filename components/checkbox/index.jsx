@@ -1,19 +1,35 @@
-import React, { forwardRef, useEffect, useState, useRef } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useState,
+  useRef,
+  useContext,
+} from 'react';
 import classNames from 'classnames';
 import Icon from '../icon';
+import CheckboxGroupContext, { CheckboxGroupContextProvider } from './context';
 
 const Checkbox = forwardRef((props, ref) => {
+  const { children, className, ...restProps } = props;
+  const context = useContext(CheckboxGroupContext);
+  const checkboxProps = {
+    ...restProps,
+  };
+
+  if (context) {
+    checkboxProps.checked = context.value.some(v => v === props.value);
+    checkboxProps.disabled = props.disabled || context.disabled;
+    checkboxProps.onChange = props.onChange;
+  }
   const {
-    children,
-    value,
     disabled = false,
     checked = false,
     defaultChecked = false,
     indeterminate = false,
     onChange,
-    className,
-    ...rest
-  } = props;
+    ...otherProps
+  } = checkboxProps;
+
   const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -45,8 +61,7 @@ const Checkbox = forwardRef((props, ref) => {
         <input
           ref={ref}
           type="checkbox"
-          value={value}
-          {...rest}
+          {...otherProps}
           className={classNames('iron-checkbox-input', {
             'iron-checkbox-input-disabled': disabled,
           })}
@@ -83,13 +98,11 @@ const Group = ({
 }) => {
   const checkboxGroupRef = useRef(null);
   const [checkedVals, setCheckedVals] = useState([...defaultValue, ...value]);
-  // console.log('children', children);
 
   useEffect(() => {
     const ele = checkboxGroupRef.current;
     let values = [...checkedVals];
     const handler = e => {
-      console.log('e', e.target);
       const { checked, value: val } = e.target;
       if (checked) {
         values.push(val);
@@ -113,17 +126,17 @@ const Group = ({
   }, [onChange, checkedVals]);
 
   return (
-    <div className="iron-checkbox-group" ref={checkboxGroupRef}>
-      {React.Children.map(children, child => {
-        console.log(child.props.children.length);
-        const { props } = child;
-        return React.cloneElement(child, {
-          defaultChecked: defaultValue.some(item => item === props.value),
-          checked: value.some(item => item === props.value),
-          disabled,
-        });
-      })}
-    </div>
+    <CheckboxGroupContextProvider
+      value={{
+        onChange,
+        value,
+        disabled,
+      }}
+    >
+      <div className="iron-checkbox-group" ref={checkboxGroupRef}>
+        {children}
+      </div>
+    </CheckboxGroupContextProvider>
   );
 };
 
