@@ -110,7 +110,7 @@ function FilterCheckbox({
     isCheckAll,
     searchVal,
     indeterminate,
-    // checkedValues,
+    checkedValues,
     handleSeach,
     handleCheckAll,
     handleCheckItem,
@@ -132,22 +132,24 @@ function FilterCheckbox({
                 0
               )}
             />
-            <VirtualOptions height={160} rowHeight={20}>
-              {filterList.map(item => {
-                const { value, count } = item;
-                const strVal = String(value);
-                return (
-                  <div key={strVal}>
-                    <Checkbox value={value} onChange={handleCheckItem}>
-                      <span title={strVal}>
-                        {formatValue(columnType, value)}
-                      </span>
-                      <span className="count">({count})</span>
-                    </Checkbox>
-                  </div>
-                );
-              })}
-            </VirtualOptions>
+            <Checkbox.Group value={checkedValues.map(({ value: v }) => v)}>
+              <VirtualOptions height={160} rowHeight={20}>
+                {filterList.map(item => {
+                  const { value, count } = item;
+                  const strVal = String(value);
+                  return (
+                    <div key={strVal}>
+                      <Checkbox value={value} onChange={handleCheckItem}>
+                        <span title={strVal}>
+                          {formatValue(columnType, value)}
+                        </span>
+                        <span className="count">({count})</span>
+                      </Checkbox>
+                    </div>
+                  );
+                })}
+              </VirtualOptions>
+            </Checkbox.Group>
           </div>
         ) : (
           <Empty

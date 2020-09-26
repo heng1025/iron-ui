@@ -49,6 +49,7 @@ module.exports = {
     // https://eslint.org/docs/rules/no-continue
     // labeledLoop is conflicted with `eslint . --fix`
     'no-continue': 0,
+    'jsx-a11y/label-has-associated-control': 0,
     // ban this for Number.isNaN needs polyfill
     'no-restricted-globals': 0,
     'max-classes-per-file': 0,

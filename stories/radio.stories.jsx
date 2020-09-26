@@ -7,11 +7,7 @@ export default {
 };
 
 export const Primary = args => {
-  return (
-    <Radio value="1" {...args}>
-      i am button
-    </Radio>
-  );
+  return <Radio {...args}>i am button</Radio>;
 };
 
 export const Checked = Primary.bind();
@@ -26,9 +22,15 @@ Disabled.args = { disabled: true };
 export const DisabledChecked = Primary.bind();
 DisabledChecked.args = { disabled: true, checked: true };
 
-export const Group = () => {
+export const Group = args => {
   return (
-    <Radio.Group defaultValue="2">
+    <Radio.Group
+      defaultValue="2"
+      {...args}
+      onChange={e => {
+        console.log('selected value', e.target.value);
+      }}
+    >
       <Radio value="1">apple</Radio>
       <Radio value="2">orange</Radio>
       <Radio value="3">bnana</Radio>
@@ -37,3 +39,6 @@ export const Group = () => {
     </Radio.Group>
   );
 };
+
+export const GroupDisabled = Group.bind();
+GroupDisabled.args = { disabled: true };

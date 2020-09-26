@@ -33,8 +33,32 @@ export const NoChildren = () => {
   );
 };
 
+export const defaultChecked = Primary.bind();
+defaultChecked.args = { defaultChecked: true };
+
 export const Checked = Primary.bind();
 Checked.args = { checked: true };
 
 export const Disabled = Primary.bind();
 Disabled.args = { disabled: true, checked: true };
+
+export const Group = args => {
+  return (
+    <Checkbox.Group
+      {...args}
+      value={['3']}
+      onChange={e => {
+        console.log('selected value', e);
+      }}
+    >
+      <Checkbox value="1">apple</Checkbox>
+      <Checkbox value="2">orange</Checkbox>
+      <Checkbox value="3">bnana</Checkbox>
+      <Checkbox value="4">pear</Checkbox>
+      <Checkbox value="5">watermelon</Checkbox>
+    </Checkbox.Group>
+  );
+};
+
+export const GroupDisabled = Group.bind();
+GroupDisabled.args = { disabled: true };

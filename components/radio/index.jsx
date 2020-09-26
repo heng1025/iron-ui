@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 const Radio = forwardRef((props, ref) => {
@@ -14,12 +14,12 @@ const Radio = forwardRef((props, ref) => {
   } = props;
   const [isChecked, setChecked] = useState(false);
 
+  // radio group need update
   useEffect(() => {
-    setChecked(defaultChecked || checked);
-  }, [defaultChecked, checked]);
+    setChecked(checked || defaultChecked);
+  }, [checked, defaultChecked]);
 
   return (
-    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       className={classNames(className, 'iron-radio-wrapper', {
         'iron-radio-wrapper-disabled': disabled,
@@ -35,8 +35,7 @@ const Radio = forwardRef((props, ref) => {
           type="radio"
           value={value}
           disabled={disabled}
-          // expect boolean
-          checked={!!isChecked}
+          checked={isChecked}
           {...rest}
           className={classNames('iron-radio-input', {
             'iron-radio-input-disabled': disabled,
@@ -62,23 +61,39 @@ const Radio = forwardRef((props, ref) => {
   );
 });
 
-const Group = ({ value, defaultValue, onChange, children }) => {
-  const [curDefaultVal, setDefaultVal] = useState(defaultValue);
+const Group = ({ value, defaultValue, disabled, onChange, children }) => {
+  const radioGroupRef = useRef(null);
   const [curVal, setVal] = useState(value);
+  const [curDefaultVal, setDefaultVal] = useState(defaultValue);
+
+  useEffect(() => {
+    const ele = radioGroupRef.current;
+    const handler = e => {
+      setDefaultVal('');
+      setVal(e.target.value);
+      if (onChange) {
+        onChange(e);
+      }
+    };
+    if (ele) {
+      ele.addEventListener('change', handler);
+    }
+
+    return () => {
+      if (ele) {
+        ele.removeEventListener('change', handler);
+      }
+    };
+  }, [onChange]);
+
   return (
-    <div className="iron-radio-group">
+    <div className="iron-radio-group" ref={radioGroupRef}>
       {React.Children.map(children, child => {
         const { props } = child;
         return React.cloneElement(child, {
           defaultChecked: curDefaultVal === props.value,
           checked: curVal === props.value,
-          onChange(e) {
-            setDefaultVal('');
-            setVal(e.target.value);
-            if (onChange) {
-              onChange(e);
-            }
-          },
+          disabled,
         });
       })}
     </div>

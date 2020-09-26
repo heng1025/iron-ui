@@ -49,8 +49,8 @@ export const Filter = () => {
             { value: '20200815', count: 12 },
             { value: '20210716', count: 12 },
           ]);
-        } else if (column === 'name') {
-          reject('error happen');
+        } else if (column === 'course') {
+          reject(new Error('error happen'));
         } else {
           setTimeout(() => {
             resolve(
@@ -61,7 +61,7 @@ export const Filter = () => {
       });
     },
     requestTableData: params => {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         if (params.column) {
           resolve(dataSource.filter(item => item.birth === '20180917'));
         } else {
@@ -73,7 +73,7 @@ export const Filter = () => {
 
   useEffect(() => {
     fetchTableList();
-  }, []);
+  }, [fetchTableList]);
 
   return (
     <Table
