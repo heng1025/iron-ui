@@ -42,9 +42,10 @@ Checked.args = { checked: true };
 export const Disabled = Primary.bind();
 Disabled.args = { disabled: true, checked: true };
 
-export const Group = () => {
+export const Group = args => {
   return (
     <Checkbox.Group
+      {...args}
       value={['3']}
       onChange={e => {
         console.log('selected value', e);
@@ -59,10 +60,11 @@ export const Group = () => {
   );
 };
 
-export const GroupGrid = () => {
+export const GroupGrid = args => {
   return (
     <Checkbox.Group
       value={['3']}
+      {...args}
       onChange={e => {
         console.log('selected value', e);
       }}
