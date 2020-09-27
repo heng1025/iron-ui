@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import classNames from 'classnames';
+import { ColumnContext } from '../context';
 import Advance from './Advance';
 import { FilterHeader, FilterPicker } from './Widget';
 import Icon from '../../icon';
@@ -8,17 +9,18 @@ import Popover from '../../popover';
 
 export { useColumnFilter } from './hooks';
 
-export function FilterTitle({
-  children,
-  columnType = 'text', // text, number, date, dateTime
-  sort,
-  onSort,
-  onCommit,
-  curColumn,
-  conditions,
-  requestColumnData,
-  searchConditions,
-}) {
+// columnType = text, number, date, dateTime
+export function FilterTitle({ children, columnType = 'text' }) {
+  const {
+    onSort,
+    onCommit,
+    fetchColData,
+    sort,
+    curColumn,
+    conditions,
+    searchConditions = [],
+  } = useContext(ColumnContext);
+
   const [isFiltered, setFiltered] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -89,7 +91,7 @@ export function FilterTitle({
     if (v) {
       setLoading(true);
       try {
-        const filters = await requestColumnData({
+        const filters = await fetchColData({
           column: curColumn,
           searchConditions,
           conditions: conditions.filter(item => item.column !== curColumn),

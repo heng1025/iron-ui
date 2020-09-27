@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
+
 import { getDays } from './common';
 
 // filterList: [{value:'abc',count:1},{value:'bbb',count:19}]
@@ -122,59 +123,34 @@ export function useFilterPicker({
 }
 
 export function useColumnFilter({
-  requestColumnData,
-  requestTableData,
-  pageSize = 10,
+  extraParams = {},
+  fetchColData,
+  fetchTabData,
+  onDataSourceChange,
 }) {
   // { column: '', value: '', condition: '7' }
   const [conditions, setConditions] = useState([]);
   // search params
-  const [searchConditions, setSearchConditioons] = useState([]);
+  const [curSort, setCurSort] = useState('');
   const [curColumn, setCurColumn] = useState('');
   const [curSortColumn, setCurSortColumn] = useState('');
-  const [curSort, setCurSort] = useState('');
-  const [dataSource, setDataSource] = useState([]);
 
-  function clearFilter() {
-    setConditions([]);
-    setCurColumn('');
-    setCurSortColumn('');
-    setCurSort('');
-  }
+  const { pageSize = 10, searchConditions } = extraParams;
 
-  async function fetchTableList(params = {}) {
-    const result = await requestTableData({ column: curColumn, ...params });
-    setDataSource(result);
-  }
-
-  async function fetchSearchTableList(updatedConditions = []) {
-    // clear filter params
-    clearFilter();
-    setSearchConditioons(updatedConditions);
-    fetchTableList({
-      page: 1,
-      pageSize,
-      searchConditions: updatedConditions,
-    });
+  async function fetchTableList(column, params = {}) {
+    const result = await fetchTabData({ column, ...params });
+    onDataSourceChange(result);
   }
 
   // filter methods
-  async function handleCommit(
-    column,
-    updatedConditions = [],
-    shouldClearSearchParams = false
-  ) {
-    // clear search params
-    if (shouldClearSearchParams) {
-      setSearchConditioons([]);
-    }
+  async function handleCommit(column, updatedConditions = []) {
     setCurColumn(column);
     setConditions(updatedConditions);
-    fetchTableList({
+    fetchTableList(column, {
       page: 1, // go back first page
       pageSize,
       conditions: updatedConditions,
-      searchConditions: shouldClearSearchParams ? [] : searchConditions,
+      searchConditions,
       sort: curSortColumn === column ? curSort : '',
     });
   }
@@ -183,7 +159,7 @@ export function useColumnFilter({
     setCurColumn(column);
     setCurSortColumn(column);
     setCurSort(sort);
-    fetchTableList({
+    fetchTableList(column, {
       sort,
       page: 1,
       pageSize,
@@ -192,32 +168,12 @@ export function useColumnFilter({
     });
   }
 
-  async function handlePageChange(p, ps) {
-    fetchTableList({
-      page: p,
-      pageSize: ps,
-      conditions,
-      searchConditions,
-      sort: curSortColumn === curColumn ? curSort : '',
-    });
-  }
-
   return {
     conditions,
-    dataSource,
-    clearFilter,
-    fetchTableList,
-    fetchSearchTableList,
-    handlePageChange,
-    handleFilterCommit: handleCommit,
-    getTitleProps: (column = curColumn) => ({
-      conditions,
-      requestColumnData,
-      curColumn: column,
-      searchConditions,
-      sort: curSortColumn === column ? curSort : '',
-      onCommit: handleCommit,
-      onSort: handleSort,
-    }),
+    searchConditions,
+    fetchColData,
+    sort: curSortColumn === curColumn ? curSort : '',
+    onCommit: handleCommit,
+    onSort: handleSort,
   };
 }

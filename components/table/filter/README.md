@@ -11,35 +11,22 @@ Widget.jsx --- select,checkbox and so on
 
 1. import component and hooks
 
-`import FilterTitle, { useColumnFilter } from 'table';`
+`import FilterTitle from 'table';`
 
-2. use component
+1. use component
 
 ```js
-const { clearFilter, fetchTableList, handlePageChange, getTitleProps } = useColumnFilter({
-  requestColumnData: (params:any)=>void, // query columns func
-  requestTableData: (params:any)=>void, // query list func
-  pageSize?: number|string,
-  reset?: Function,
-});
-
-<Table {...porps}>
- <Column
-    dataIndex="userName"
-    title={<FilterTitle {...getTitleProps('name')}>name</FilterTitle>}
-  />
-</Table>
-```
-
-```
-{
-  filterItems: [],
-  filterTables: [],
-  filterTableTotal: 0,
-  filterTablePage: defaultPage,
-  filterTablePageSize: defaultPageSize,
-  filterParams: {},
-}
+<Table
+  dataSource={dataSource}
+  fetchColData={requestColumnData}
+  fetchTabData={requestTableData}
+  columns={columns.map(column => {
+    return {
+      ...column,
+      title: <FilterTitle columnType={column.type}>{column.title}</FilterTitle>,
+    };
+  })}
+/>
 ```
 
 ### API
@@ -64,8 +51,6 @@ enum ConditionType = {
 type Conditions = Array<{ column: string, value: string|string[], condition: ConditionType }>
 ```
 
-- fetchTableList / fetchSearchTableList
-
 ```typescript
 type Params = {
   page: string | number;
@@ -75,26 +60,10 @@ type Params = {
   currentColumn: string;
   sort: '' | '0' | '1';
 };
-
-type fetchTableList = {
-  (params?: Params, tableName?: string): void;
-};
 ```
-
-- handlePageChange
-
-```typescript
-type handlePageChange = {
-  (page: string, pageSize: string): void;
-};
-```
-
-- getTitleProps
 
 ```typescript
 type ResParams = {
-  request: Function;
-  curColumn: string;
   searchConditions: Conditions;
   conditions: Conditions;
   tableName: string;
@@ -124,16 +93,9 @@ interface Prop extends ResParams {
 
 ```typescript
 function useColumnFilter({
-  request:Function,
-  pageSize:number,
-  options = {},
-}):{
-    conditions:Conditions,
-    clearFilter:Function,
-    fetchTableList:Function,
-    fetchSearchTableList:Function,
-    handlePageChange:Function,,
-    handleFilterCommit:Function,
-    getTitleProps(column:string):ResParams:
-  }
+  extraParams?:any,
+  fetchColData:Function,
+  fetchTabData:Function,
+  onDataSourceChange:Function,
+}): ResParams;
 ```
