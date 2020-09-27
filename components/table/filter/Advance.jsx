@@ -150,7 +150,7 @@ function AdvanceFilter({
       <div style={{ marginBottom: 20 }}>
         Custom AutoFilter - {transformWord(columnType)}
       </div>
-      <Form onFinish={handleCommit}>
+      <Form onFinish={handleCommit} initialValues={{ [connectField]: 'and' }}>
         {[firstField, { condition: connectField }, secondField].map(item => (
           <Row key={item.condition}>
             {item.condition === connectField ? (

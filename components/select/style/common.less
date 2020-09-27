@@ -8,42 +8,42 @@
   }
 }
 
-.@{select-prefix-cls}-container {
-  position: relative;
-  .@{select-prefix-cls}-input {
-    input {
-      cursor: pointer;
-    }
-    &.@{select-prefix-cls}-default {
-      input {
-        cursor: default;
+.@{select-prefix-cls} {
+  &-container {
+    position: relative;
+    .@{iron-prefix}-input-suffix {
+      color: rgba(0, 0, 0, 0.25);
+      .icon-close {
+        cursor: pointer;
       }
     }
   }
-  .@{iron-prefix}-input-suffix {
-    color: rgba(0, 0, 0, 0.25);
-    font-size: 12px;
-    .icon-close {
+  &-input {
+    input {
       cursor: pointer;
     }
   }
-}
-
-.@{select-prefix-cls}-options {
-  position: absolute;
-  top: 38px;
-  left: 0;
-  z-index: 900;
-  width: 100%;
-  color: #000000a6;
-  line-height: 1;
-  text-align: left;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  &.empty {
-    text-align: center;
+  &-default {
+    input {
+      cursor: default;
+    }
   }
-  .@{select-prefix-cls}-option-item {
+  &-options {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    z-index: 900;
+    width: 100%;
+    color: #000000a6;
+    line-height: 1;
+    text-align: left;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    &.empty {
+      text-align: center;
+    }
+  }
+  &-option-item {
     padding: 0 6px;
     overflow: hidden;
     line-height: 30px;

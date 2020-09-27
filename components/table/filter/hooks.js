@@ -105,7 +105,6 @@ export function useFilterPicker({
 
   function handleSeach(e) {
     const { value = '' } = e.target;
-    console.log('handleSeach -> value', value);
     setSearchVal(value);
     debounceInputChange(value);
   }
@@ -184,7 +183,7 @@ export function useColumnFilter({
     setCurColumn(column);
     setCurSortColumn(column);
     setCurSort(sort);
-    return fetchTableList({
+    fetchTableList({
       sort,
       page: 1,
       pageSize,

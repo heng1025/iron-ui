@@ -12,9 +12,9 @@ const PopContent = ({ title, content, style }) => {
 
 const Popover = ({
   children,
-  visible,
   title,
   content,
+  visible,
   onVisibleChange,
   overlayStyle,
 }) => {

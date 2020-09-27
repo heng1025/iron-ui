@@ -105,9 +105,6 @@ export function FilterTitle({
   const handleCheckList = useCallback(val => {
     setCheckedList(val);
   }, []);
-  // function handleCheckList(val) {
-  //   setCheckedList(val);
-  // }
 
   async function handleClear() {
     const updatedConditions = conditions.filter(
@@ -121,6 +118,7 @@ export function FilterTitle({
     if (s !== sort) {
       await onSort(curColumn, s);
     }
+
     setVisible(false);
   }
 
@@ -169,7 +167,6 @@ export function FilterTitle({
       />
       <Popover
         placement="bottomLeft"
-        trigger="click"
         visible={visible}
         onVisibleChange={handleVisibleChange}
         overlayStyle={{ width: 280 }}

@@ -133,19 +133,23 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
           }
         }}
       />
-      {searchVisible && (
-        <div style={optionContainerStyle} className="iron-select-options">
-          {optionTitle}
-          <Options
-            className="iron-select-option-item"
-            selected={selectedValue}
-            loading={loading}
-            onClick={handleClick}
-          >
-            {filterList}
-          </Options>
-        </div>
-      )}
+      <div
+        style={{
+          ...optionContainerStyle,
+          display: searchVisible ? 'block' : 'none',
+        }}
+        className="iron-select-options"
+      >
+        {optionTitle}
+        <Options
+          className="iron-select-option-item"
+          selected={selectedValue}
+          loading={loading}
+          onClick={handleClick}
+        >
+          {filterList}
+        </Options>
+      </div>
     </div>
   );
 });

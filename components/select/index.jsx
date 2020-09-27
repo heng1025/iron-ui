@@ -225,24 +225,25 @@ const VirtualSelect = forwardRef((props, ref) => {
           setSearchVisible(true);
         }}
       />
-      {searchVisible && (
-        <div
-          style={optionContainerStyle}
-          className={classNames('iron-select-options', {
-            empty: filterList.length === 0,
-          })}
+      <div
+        style={{
+          ...optionContainerStyle,
+          display: searchVisible ? 'block' : 'none',
+        }}
+        className={classNames('iron-select-options', {
+          empty: filterList.length === 0,
+        })}
+      >
+        {optionTitle}
+        <Options
+          selected={selectedValue}
+          className="iron-select-option-item"
+          loading={loading}
+          onClick={handleClick}
         >
-          {optionTitle}
-          <Options
-            selected={selectedValue}
-            className="iron-select-option-item"
-            loading={loading}
-            onClick={handleClick}
-          >
-            {filterList}
-          </Options>
-        </div>
-      )}
+          {filterList}
+        </Options>
+      </div>
     </div>
   );
 });

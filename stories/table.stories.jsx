@@ -73,7 +73,7 @@ export const Filter = () => {
 
   useEffect(() => {
     fetchTableList();
-  }, [fetchTableList]);
+  }, []);
 
   return (
     <Table
