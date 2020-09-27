@@ -72,9 +72,7 @@ const Checkbox = forwardRef((props, ref) => {
           // expect boolean
           checked={!!isChecked}
           onChange={e => {
-            if (e.target && e.target.checked) {
-              setChecked(e.target.checked);
-            }
+            setChecked(e.target.checked);
             if (onChange) {
               onChange(e);
             }
