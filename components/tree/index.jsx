@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../icon';
 import Checkbox from '../checkbox';
@@ -64,20 +64,6 @@ const updateSupNodeState = (parentNode, checked) => {
   }
 };
 
-const updateTreeNodeState = (trees, checkedKeys) => {
-  trees.forEach(node => {
-    const isChecked = checkedKeys.includes(node.id);
-    node.checked = isChecked;
-    node.indeterminate = false;
-    if (node.parent) {
-      updateSupNodeState(node.parent, isChecked);
-    }
-    if (nodeHasChildren(node)) {
-      updateTreeNodeState(node.children, checkedKeys);
-    }
-  });
-};
-
 const getCheckedNodes = (trees, checkedNodes = [], checkedKeys = []) => {
   trees.forEach(node => {
     if (nodeHasChildren(node)) {
@@ -94,7 +80,6 @@ const getCheckedNodes = (trees, checkedNodes = [], checkedKeys = []) => {
 function VirtualTree({
   treeData = [],
   checkable,
-  rowClassName,
   defaultExpandAll,
   checkedKeys = [],
   onCheck,
@@ -104,22 +89,13 @@ function VirtualTree({
   const trees = useMemo(() => {
     const rawData = JSON.stringify(treeData);
     return transformTreeData(JSON.parse(rawData), defaultExpandAll);
-  }, [
-    // resolve referrence issue
-    JSON.stringify(treeData),
-    defaultExpandAll,
-  ]);
+  }, [defaultExpandAll, treeData]);
 
   function refreshList() {
-    listRef.current.recomputeRowHeights();
-    listRef.current.forceUpdate();
+    if (listRef.current) {
+      listRef.current.forceUpdate();
+    }
   }
-
-  // update node state
-  useEffect(() => {
-    updateTreeNodeState(trees, checkedKeys);
-    refreshList();
-  }, [checkedKeys]);
 
   function renderItem(item, deepness = 0) {
     let nodes = [];
@@ -141,7 +117,6 @@ function VirtualTree({
         onCheck={() => {
           if (onCheck) {
             const { checkedKeys: cKeys, checkedNodes } = getCheckedNodes(trees);
-            console.log('renderItem -> checkedNodes', checkedNodes);
             onCheck(cKeys, { checkedNodes });
             refreshList();
           }
@@ -156,23 +131,13 @@ function VirtualTree({
     );
   }
 
-  function cellRenderer(props) {
-    const { index, style } = props;
-    const child = trees[index];
-    return (
-      <div style={style} key={child.id} className={rowClassName}>
-        {renderItem(child)}
-      </div>
-    );
-  }
-
   return (
     <VListWithDynamic
       ref={listRef}
       className="iron-tree"
-      rowCount={trees.length}
-      rowHeight={({ index }) => getExpandedItemCount(trees[index]) * ROW_HEIGHT}
-      rowRenderer={cellRenderer}
+      itemCount={trees.length}
+      itemSize={index => getExpandedItemCount(trees[index]) * ROW_HEIGHT}
+      rowRenderer={({ index }) => renderItem(trees[index])}
     />
   );
 }
@@ -238,7 +203,6 @@ VirtualTree.TreeNode = TreeNode;
 VirtualTree.propTypes = {
   treeData: PropTypes.array,
   checkable: PropTypes.bool,
-  rowClassName: PropTypes.string,
   defaultExpandAll: PropTypes.bool,
   checkedKeys: PropTypes.array,
   onCheck: PropTypes.func,

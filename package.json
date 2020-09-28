@@ -40,7 +40,8 @@
     "dayjs": "^1.8.36",
     "lodash": "^4.17.20",
     "prop-types": "^15.7.2",
-    "react-virtualized": "^9.22.2"
+    "react-virtualized-auto-sizer": "^1.0.2",
+    "react-window": "^1.8.5"
   },
   "peerDependencies": {
     "react": ">=16.8",

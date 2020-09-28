@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import VList from 'react-virtualized/dist/es/List';
-import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
+import { FixedSizeList as VList } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 import Spin from '../spin';
 import Empty from '../empty';
 
@@ -55,19 +55,17 @@ export function Options({
     <AutoSizer disableHeight>
       {({ width }) => (
         <VList
-          width={width}
           height={height}
-          rowHeight={rowHeight}
-          rowCount={elementLen}
-          rowRenderer={({ index, style }) => {
-            const child = children[index];
-            return (
-              <VRow key={child.key || child.value} style={style} {...rest}>
-                {child}
-              </VRow>
-            );
-          }}
-        />
+          itemCount={elementLen}
+          itemSize={rowHeight}
+          width={width}
+        >
+          {({ index, style }) => (
+            <VRow style={style} {...rest}>
+              {children[index]}
+            </VRow>
+          )}
+        </VList>
       )}
     </AutoSizer>
   );
