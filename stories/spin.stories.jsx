@@ -13,14 +13,12 @@ export const Primay = args => {
 export const Tip = Primay.bind();
 Tip.args = { tip: 'loading' };
 
-export const Embedded = () => {
-  return (
-    <Spin spinning>
-      <div>
-        <div>今天下大雨了</div>
-        <div>游泳还是不会</div>
-        <div>啊啊啊啊啊啊</div>
-      </div>
-    </Spin>
-  );
-};
+export const Embedded = args => (
+  <Spin spinning {...args}>
+    <div>
+      <div>今天下大雨了</div>
+      <div>游泳还是不会</div>
+      <div>啊啊啊啊啊啊</div>
+    </div>
+  </Spin>
+);

@@ -13,7 +13,7 @@ const birty = ['20180917', '20200815', '20210716', '20200813'];
 
 const dataSource = [];
 
-for (let i = 1, len = 80; i <= len; i++) {
+for (let i = 1, len = 20; i <= len; i++) {
   dataSource.push({
     name: `tiger${i}`,
     course: courses[i % courses.length],
@@ -58,7 +58,7 @@ const requestColumnData = ({ column }) => {
 };
 
 const requestTableData = (params = {}) => {
-  console.log('requestTableData -> params', params);
+  // console.log('requestTableData -> params', params);
   return new Promise(resolve => {
     if (params.column) {
       resolve(dataSource.filter(item => item.birth === '20180917'));
@@ -68,7 +68,7 @@ const requestTableData = (params = {}) => {
   });
 };
 
-export const Filter = () => {
+export function Filter() {
   useEffect(() => {
     requestTableData();
   }, []);
@@ -88,4 +88,4 @@ export const Filter = () => {
       })}
     />
   );
-};
+}

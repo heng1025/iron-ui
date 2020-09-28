@@ -128,5 +128,8 @@ const Group = ({
   );
 };
 
+Checkbox.displayName = 'Checkbox';
+Group.displayName = 'Checkbox.Group';
+
 Checkbox.Group = Group;
 export default Checkbox;

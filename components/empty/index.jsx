@@ -24,4 +24,5 @@ const Empty = ({
   );
 };
 
+Empty.displayName = 'Empty';
 export default Empty;

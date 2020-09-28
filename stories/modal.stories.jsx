@@ -11,7 +11,7 @@ export const Primary = args => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <>
+    <div>
       <Button {...args} onClick={() => setVisible(true)}>
         i am button
       </Button>
@@ -26,6 +26,6 @@ export const Primary = args => {
         <p>i will spend my holiday</p>
         <p>i will spend my holiday</p>
       </Modal>
-    </>
+    </div>
   );
 };

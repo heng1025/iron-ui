@@ -17,4 +17,5 @@ const Spin = ({ children, spinning, tip }) => {
   );
 };
 
+Spin.displayName = 'Spin'
 export default Spin;

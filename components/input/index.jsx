@@ -14,4 +14,5 @@ const Input = forwardRef(({ suffix, className, ...rest }, ref) => {
   );
 });
 
+Input.displayName = 'Input';
 export default Input;

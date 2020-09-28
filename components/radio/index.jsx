@@ -102,5 +102,8 @@ const Group = ({
   );
 };
 
+Radio.displayName = 'Radio';
+Group.displayName = 'Radio.Group';
+
 Radio.Group = Group;
 export default Radio;

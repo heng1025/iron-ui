@@ -8,4 +8,5 @@ const Button = ({ children, ...rest }) => {
   );
 };
 
+Button.displayName = 'Button';
 export default Button;

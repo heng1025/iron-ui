@@ -4,7 +4,7 @@ import VirtualSelect from '../components/select';
 
 const options = [];
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 100; i++) {
   const value = `${i.toString(36)}${i}`;
   options.push(value);
 }

@@ -135,8 +135,8 @@ const VirtualAutoComplete = forwardRef((props, ref) => {
       />
       <div
         style={{
-          ...optionContainerStyle,
           display: searchVisible ? 'block' : 'none',
+          ...optionContainerStyle,
         }}
         className="iron-select-options"
       >
@@ -190,5 +190,7 @@ VirtualAutoComplete.propTypes = {
    */
   onBlur: PropTypes.func,
 };
+
+VirtualAutoComplete.displayName = 'VirtualAutoComplete';
 
 export default VirtualAutoComplete;

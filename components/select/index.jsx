@@ -227,8 +227,8 @@ const VirtualSelect = forwardRef((props, ref) => {
       />
       <div
         style={{
-          ...optionContainerStyle,
           display: searchVisible ? 'block' : 'none',
+          ...optionContainerStyle,
         }}
         className={classNames('iron-select-options', {
           empty: filterList.length === 0,
@@ -309,4 +309,5 @@ VirtualSelect.defaultProps = {
   placeholder: 'please select',
 };
 
+VirtualSelect.displayName = 'VirtualSelect';
 export default VirtualSelect;
