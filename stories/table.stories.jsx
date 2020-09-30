@@ -78,6 +78,7 @@ export function Filter() {
       dataSource={dataSource}
       fetchColData={requestColumnData}
       fetchTabData={requestTableData}
+      rowKey="name"
       columns={columns.map(column => {
         return {
           ...column,

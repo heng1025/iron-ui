@@ -1,8 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
 
-const Button = ({ children, ...rest }) => {
+const Button = ({ children, className: cls, ...rest }) => {
   return (
-    <button className="iron-btn" type="button" {...rest}>
+    <button className={classNames(cls, 'iron-btn')} type="button" {...rest}>
       {children}
     </button>
   );

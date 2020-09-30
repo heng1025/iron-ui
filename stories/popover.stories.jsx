@@ -12,8 +12,10 @@ export const Primary = args => {
   return (
     <Popover
       {...args}
-      title="123"
-      content="890"
+      title="title"
+      content="content"
+      trigger="click  "
+      getPopupContainer={triggerNode=>triggerNode.parentNode}
       visible={visible}
       onVisibleChange={v => setVisible(v)}
     >

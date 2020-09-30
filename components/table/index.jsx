@@ -22,7 +22,14 @@ const TableColumn = ({ column, content }) => {
   );
 };
 
-const TableRow = ({ columns, className, style, content = {}, isHeader }) => {
+const TableRow = ({
+  columns,
+  className,
+  style,
+  content = {},
+  rowKey,
+  isHeader,
+}) => {
   const {
     extraParams,
     fetchColData,
@@ -47,6 +54,7 @@ const TableRow = ({ columns, className, style, content = {}, isHeader }) => {
         if (isHeader) {
           return (
             <ColumnContextProvider
+              key={column.dataIndex}
               value={{
                 curColumn: column.dataIndex,
                 ...filterProps,
@@ -57,14 +65,24 @@ const TableRow = ({ columns, className, style, content = {}, isHeader }) => {
           );
         }
         return (
-          <TableColumn {...columnProps} key={column.key || column.dataIndex} />
+          <TableColumn
+            {...columnProps}
+            key={column[rowKey] || column.key || column.dataIndex}
+          />
         );
       })}
     </ul>
   );
 };
 
-const Content = ({ columns, dataSource, scroll = {}, children, rowStyle }) => {
+const Content = ({
+  columns,
+  dataSource,
+  scroll = {},
+  rowKey,
+  children,
+  rowStyle,
+}) => {
   return (
     <div
       className="iron-table-content"
@@ -77,7 +95,7 @@ const Content = ({ columns, dataSource, scroll = {}, children, rowStyle }) => {
             columns={columns}
             style={rowStyle}
             content={item}
-            rowKey={item.name}
+            rowKey={rowKey}
             key={item.name}
           />
         );
@@ -88,6 +106,7 @@ const Content = ({ columns, dataSource, scroll = {}, children, rowStyle }) => {
 
 const Table = ({
   columns,
+  rowKey,
   pageSize,
   dataSource,
   scroll = {},
@@ -116,7 +135,12 @@ const Table = ({
       <div className="iron-table">
         {scroll.x ? (
           <div style={{ width: scroll.x, height: scroll.y, overflow: 'auto' }}>
-            <Content columns={columns} dataSource={list} scroll={scroll}>
+            <Content
+              columns={columns}
+              dataSource={list}
+              scroll={scroll}
+              rowKey={rowKey}
+            >
               <TableRow
                 columns={columns}
                 className="iron-table-header"
@@ -135,6 +159,7 @@ const Table = ({
             <Content
               rowStyle={{ width: '100%' }}
               columns={columns}
+              rowKey={rowKey}
               dataSource={list}
               scroll={scroll}
             />

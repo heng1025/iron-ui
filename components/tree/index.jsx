@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../icon';
 import Checkbox from '../checkbox';
@@ -64,6 +64,20 @@ const updateSupNodeState = (parentNode, checked) => {
   }
 };
 
+const updateTreeNodeState = (trees, checkedKeys) => {
+  trees.forEach(node => {
+    const isChecked = checkedKeys.includes(node.id);
+    node.checked = isChecked;
+    node.indeterminate = false;
+    if (node.parent) {
+      updateSupNodeState(node.parent, isChecked);
+    }
+    if (nodeHasChildren(node)) {
+      updateTreeNodeState(node.children, checkedKeys);
+    }
+  });
+};
+
 const getCheckedNodes = (trees, checkedNodes = [], checkedKeys = []) => {
   trees.forEach(node => {
     if (nodeHasChildren(node)) {
@@ -85,17 +99,23 @@ function VirtualTree({
   onCheck,
 }) {
   const listRef = useRef(null);
+  const rawData = JSON.stringify(treeData);
 
   const trees = useMemo(() => {
-    const rawData = JSON.stringify(treeData);
     return transformTreeData(JSON.parse(rawData), defaultExpandAll);
-  }, [defaultExpandAll, treeData]);
+  }, [defaultExpandAll, rawData]);
 
   function refreshList() {
     if (listRef.current) {
       listRef.current.forceUpdate();
     }
   }
+
+  // update node state
+  useEffect(() => {
+    updateTreeNodeState(trees, checkedKeys);
+    refreshList();
+  }, [checkedKeys, trees]);
 
   function renderItem(item, deepness = 0) {
     let nodes = [];

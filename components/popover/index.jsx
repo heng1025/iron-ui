@@ -1,14 +1,14 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-const PopContent = ({ title, content, style }) => {
+const PopContent = forwardRef(({ title, content, style }, ref) => {
   return (
-    <div className="iron-popover" style={style}>
+    <div className="iron-popover" style={style} ref={ref}>
       {title && <h2 className="iron-popover-title">{title}</h2>}
       <div className="iron-popover-content">{content}</div>
     </div>
   );
-};
+});
 
 const Popover = ({
   children,
@@ -18,50 +18,60 @@ const Popover = ({
   onVisibleChange,
   overlayStyle,
 }) => {
+  const openRef = useRef(null);
   const popoverRef = useRef(null);
-  const [el, setEl] = useState(document.body);
-  const [top, setTop] = useState(0);
+  const [container, setContainer] = useState(document.body);
+  const [position, setPosition] = useState(0);
 
   useEffect(() => {
-    const dom = popoverRef.current;
-    const offset = 10;
-    if (dom) {
-      setEl(dom);
-      setTop(dom.clientHeight + offset);
-    }
+    const openEl = openRef.current;
+    const dom = openEl.parentNode;
+    const { offsetHeight, offsetLeft, offsetTop } = openEl;
+    const offsetDelta = 5;
+    setContainer(dom);
+    setPosition({
+      top: offsetHeight + offsetTop + offsetDelta,
+      left: offsetLeft,
+    });
   }, []);
 
-  useEffect(() => {
-    const optionWrap = popoverRef.current;
-    const handler = e => {
-      if (optionWrap && !optionWrap.contains(e.target)) {
-        onVisibleChange(false);
-      }
-    };
-    window.addEventListener('click', handler);
-    return () => {
-      window.removeEventListener('click', handler);
-    };
-  }, [onVisibleChange]);
+  // useEffect(() => {
+  //   const popoverEl = popoverRef.current;
+  //   const handler = e => {
+  //     console.log('e.target', e.target);
+  //     if (visible && popoverEl && !popoverEl.contains(e.target)) {
+  //       onVisibleChange(false);
+  //     }
+  //   };
+  //   window.addEventListener('click', handler);
+  //   return () => {
+  //     window.removeEventListener('click', handler);
+  //   };
+  // }, [visible, onVisibleChange]);
 
   return (
-    <div ref={popoverRef} className="iron-popover-wrapper">
+    <>
+      <span
+        ref={openRef}
+        aria-hidden="true"
+        onClick={() => onVisibleChange(!visible)}
+      >
+        {children}
+      </span>
       {createPortal(
         <PopContent
+          ref={popoverRef}
           title={title}
           content={content}
           style={{
-            display: visible ? 'block' : 'none',
-            top: `${top}px`,
+            ...position,
             ...overlayStyle,
+            display: visible ? 'block' : 'none',
           }}
         />,
-        el
+        container
       )}
-      <span onClick={() => onVisibleChange(!visible)} aria-hidden="true">
-        {children}
-      </span>
-    </div>
+    </>
   );
 };
 export default Popover;

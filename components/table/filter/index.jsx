@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import classNames from 'classnames';
+
+// import Popover from 'antd/es/popover';
+// import 'antd/es/popover/style/css';
+
 import { ColumnContext } from '../context';
 import Advance from './Advance';
 import { FilterHeader, FilterPicker } from './Widget';
@@ -169,7 +173,9 @@ export function FilterTitle({ children, columnType = 'text' }) {
       />
       <Popover
         placement="bottomLeft"
+        trigger="click"
         visible={visible}
+        getPopupContainer={triggerNode => triggerNode.parentNode}
         onVisibleChange={handleVisibleChange}
         overlayStyle={{ width: 280 }}
         content={
